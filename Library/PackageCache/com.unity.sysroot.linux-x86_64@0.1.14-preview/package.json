@@ -1,0 +1,23 @@
+{
+  "name": "com.unity.sysroot.linux-x86_64",
+  "displayName": "Sysroot Linux x64",
+  "description": "Sysroot used to build unity player for linux x86_64",
+  "version": "0.1.14-preview",
+  "unity": "2019.3",
+  "keywords": [
+    "unity",
+    "linux",
+    "sysroot"
+  ],
+  "dependencies": {
+    "com.unity.sysroot": "0.1.18-preview"
+  },
+  "upmCi": {
+    "footprint": "b0c9d1b24353811af51ecad7b88bba08794ed976"
+  },
+  "repository": {
+    "url": "https://github.com/Unity-Technologies/com.unity.sysroot.git",
+    "type": "git",
+    "revision": "0d5e7b07c95f3ae15d6d80931a071b042e97189b"
+  }
+}
