@@ -68,6 +68,8 @@ namespace PA_DronePack
             line.startWidth = 0.05f; line.endWidth = 0.05f;
             line.SetPosition(0, new Vector3(0f, -10f, 0f));
             line.SetPosition(1, new Vector3(0f, -10f, 0f));
+
+            //MAP.GetComponent<map>().InitWorld();
         }
 
         public override void OnEpisodeBegin()

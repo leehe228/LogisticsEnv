@@ -500,6 +500,19 @@ MonoBehaviour:
   destinationPos: {x: 0, y: 0, z: 0}
   boxPos: {x: 0, y: 0, z: 0}
   line: {fileID: 0}
+--- !u!114 &419991816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419991812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d68adafd515bf44bccd13ace15a907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MAP: {fileID: 0}
 --- !u!120 &419991817
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -614,14 +627,14 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  m_RaysPerDirection: 36
+  m_RaysPerDirection: 9
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0
-  m_RayLength: 8
+  m_RayLength: 5.62
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
-  m_ObservationStacks: 5
+  m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 0.46666667}
   m_StartVerticalOffset: 0
@@ -640,7 +653,7 @@ GameObject:
   - component: {fileID: 639628078}
   m_Layer: 0
   m_Name: wall
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -771,7 +784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6445124561591980756, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: forwardBackward
-      value: Vertical
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6445124561591980756, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: strafeLeftRight
@@ -956,14 +969,14 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  m_RaysPerDirection: 36
+  m_RaysPerDirection: 9
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0
   m_RayLength: 8
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
-  m_ObservationStacks: 5
+  m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 0.46666667}
   m_StartVerticalOffset: 0
@@ -1140,7 +1153,7 @@ GameObject:
   - component: {fileID: 954744624}
   m_Layer: 0
   m_Name: wall
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1505,14 +1518,14 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  m_RaysPerDirection: 36
+  m_RaysPerDirection: 9
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0
   m_RayLength: 8
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
-  m_ObservationStacks: 5
+  m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 0.46666667}
   m_StartVerticalOffset: 0
@@ -2076,14 +2089,14 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  m_RaysPerDirection: 36
+  m_RaysPerDirection: 9
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0
   m_RayLength: 8
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
-  m_ObservationStacks: 5
+  m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 0.46666667}
   m_StartVerticalOffset: 0
@@ -2201,7 +2214,7 @@ GameObject:
   - component: {fileID: 1630381360}
   m_Layer: 0
   m_Name: wall
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2297,7 +2310,7 @@ GameObject:
   - component: {fileID: 1672261810}
   m_Layer: 0
   m_Name: wall
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2579,14 +2592,14 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  m_RaysPerDirection: 36
+  m_RaysPerDirection: 9
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0
   m_RayLength: 8
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
-  m_ObservationStacks: 5
+  m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 0.46666667}
   m_StartVerticalOffset: 0

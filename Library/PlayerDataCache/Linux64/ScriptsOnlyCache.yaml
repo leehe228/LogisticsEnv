@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - LogisticsAcademy
     - PA_DronePack.PA_DroneAxisInput
     - PA_DronePack.PA_DroneController
     - PA_DronePack.PA_ObjectID
@@ -78,6 +79,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 3794}
     - Class: 114
       Script: {instanceID: 4862}
+    - Class: 114
+      Script: {instanceID: 17156}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -707,7 +710,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: b8868b88dbe8fbe73d3ecb965fd27a1f
+      Hash: f461c7574abec1794073cc019e6ccf28
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: map
@@ -753,6 +756,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.ML-Agents.dll
     namespaceName: Unity.MLAgents.Demonstrations
     className: DemonstrationSummary
+  - hash:
+      serializedVersion: 2
+      Hash: 8b02ecd1b907fc5ec802129b9cdeacfa
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LogisticsAcademy
   platform: 24
   scenePathNames:
   - Assets/Scenes/Logistics.unity

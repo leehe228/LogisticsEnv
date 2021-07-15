@@ -58,8 +58,8 @@ public class map : MonoBehaviour
         smallQueueInterval = 20f;
         bigQueueInterval = 20f;
 
-        maxSmallBoxNum = 5;
-        maxBigBoxNum = 3;
+        maxSmallBoxNum = 10;
+        maxBigBoxNum = 6;
 
         mapSize = 40;
         numBuilding = 10;
@@ -78,7 +78,32 @@ public class map : MonoBehaviour
         InitWorld();
     }
 
-    void InitWorld() {
+    public void InitWorld() {
+
+        // delete all
+        GameObject[] hubs = GameObject.FindGameObjectsWithTag("hub");
+        GameObject[] destinations = GameObject.FindGameObjectsWithTag("destination");
+        GameObject[] parcels = GameObject.FindGameObjectsWithTag("parcel");
+        GameObject[] buildings = GameObject.FindGameObjectsWithTag("obstacle");
+
+        foreach (GameObject hub in hubs) {
+            Destroy(hub);
+        }
+
+        foreach (GameObject destination in destinations) {
+            Destroy(destination);
+        }
+
+        foreach (GameObject parcel in parcels) {
+            Destroy(parcel);
+        }
+
+        foreach (GameObject building in buildings) {
+            if (building.name != "wall") {
+                Destroy(building);
+            }
+        }
+
         // init table
         world = new int[mapSize, mapSize];
         for (int i = 0; i < mapSize; i++) {

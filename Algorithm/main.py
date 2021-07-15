@@ -1,8 +1,8 @@
 import mlagents
 import numpy as np
-from mlagents_envs.environment import UnityEnvironment as UE
+from mlagents_envs.environment import UnityEnvironment
 
-env = UE(file_name='../Build/Logistics')
+env = UnityEnvironment(file_name='../Build/Logistics')
 env.reset()
 
 # Get behaviour name
@@ -24,18 +24,24 @@ env.reset()
 decision_steps, terminal_steps = env.get_steps(behavior_name)
 print(list(decision_steps))
 
-for episode in range(3000):
+t = input()
+
+for episode in range(10):
     tracked_agent = -1
     done = False
     episode_rewards = 0
 
-    while not done:
+    env.reset()
+
+    for step in range(30):
+        print("step :", step, end='\r')
         if tracked_agent == -1 and len(decision_steps) ==1:
             tracked_agent = decision_steps.agent_id[0]
 
         # Generate an action for all agents
         num_agents = len(decision_steps)
-        action = np.random.randint(2, size=(num_agents, spec.action_size))
+        action = np.random.rand(num_agents, spec.action_size)
+        action = action * 2 - 1.0
         
         # Set the actions
         env.set_actions(behavior_name, action)
@@ -50,5 +56,5 @@ for episode in range(3000):
             episode_rewards += terminal_steps[tracked_agent].reward
             done = True
             print("done")
-            
+
     print("Total rewards for episode {} is {}".format(episode, episode_rewards))
