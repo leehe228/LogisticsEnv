@@ -10,9 +10,16 @@ public class bigbox : MonoBehaviour
     private bool isHold1, isHold2;
     public Vector3 destPos;
 
+    // MAP
+    public GameObject MAP;
+
+    public int dx, dz;
+
     void Start()
     {
         isHold1 = isHold2 = false;
+
+        MAP = GameObject.FindGameObjectWithTag("map");
     }
 
 
@@ -61,60 +68,62 @@ public class bigbox : MonoBehaviour
     {
         if (!isHold1)
         {
-            if (!isHold1)
+            if (other.gameObject.CompareTag("uav"))
             {
-                if (other.gameObject.CompareTag("uav"))
+                UAV1 = GameObject.Find(other.gameObject.name);
+                if (!UAV1.GetComponent<UAVAgent>().isHold)
                 {
-                    UAV1 = GameObject.Find(other.gameObject.name);
-                    if (!UAV1.GetComponent<UAVAgent>().isHold)
-                    {
-                        isHold1 = true;
-                        UAV1.GetComponent<UAVAgent>().boxPos = gameObject.transform.position;
-                        UAV1.GetComponent<UAVAgent>().isHold = true;
-                        UAV1.GetComponent<UAVAgent>().boxType = 2;
-                        UAV1.GetComponent<UAVAgent>().destinationPos = destPos;
-                        
-                        UAV1.GetComponent<UAVAgent>().GiveReward(1.0f);
-                    }
+                    isHold1 = true;
+                    UAV1.GetComponent<UAVAgent>().boxPos = gameObject.transform.position;
+                    UAV1.GetComponent<UAVAgent>().isHold = true;
+                    UAV1.GetComponent<UAVAgent>().boxType = 2;
+                    UAV1.GetComponent<UAVAgent>().destinationPos = destPos;
+                    
+                    UAV1.GetComponent<UAVAgent>().GiveReward(1.0f);
                 }
             }
-            if (isHold1 == true && !isHold2)
+        }
+            
+        if (isHold1 == true && !isHold2)
+        {
+            if (other.gameObject.CompareTag("uav"))
             {
-                if (other.gameObject.CompareTag("uav"))
+                UAV2 = GameObject.Find(other.gameObject.name);
+                if (!UAV2.GetComponent<UAVAgent>().isHold)
                 {
-                    UAV2 = GameObject.Find(other.gameObject.name);
-                    if (!UAV2.GetComponent<UAVAgent>().isHold)
-                    {
-                        isHold2 = true;
-                        UAV2.GetComponent<UAVAgent>().boxPos = gameObject.transform.position;
-                        UAV2.GetComponent<UAVAgent>().isHold = true;
-                        UAV2.GetComponent<UAVAgent>().boxType = 2;
-                        UAV2.GetComponent<UAVAgent>().destinationPos = destPos;
-                        
-                        UAV1.GetComponent<UAVAgent>().GiveReward(1.0f);
-                        UAV2.GetComponent<UAVAgent>().GiveReward(2.0f);
-                    }
+                    isHold2 = true;
+                    UAV2.GetComponent<UAVAgent>().boxPos = gameObject.transform.position;
+                    UAV2.GetComponent<UAVAgent>().isHold = true;
+                    UAV2.GetComponent<UAVAgent>().boxType = 2;
+                    UAV2.GetComponent<UAVAgent>().destinationPos = destPos;
+                    
+                    UAV1.GetComponent<UAVAgent>().GiveReward(1.0f);
+                    UAV2.GetComponent<UAVAgent>().GiveReward(2.0f);
+
+                    // Spawn new parcel
+                    MAP.GetComponent<map>().SpawnBigBox();
                 }
             }
+        }
 
-            if (isHold1 && isHold2)
+        if (isHold1 && isHold2)
+        {
+            if (other.gameObject.CompareTag("destination"))
             {
-                if (other.gameObject.CompareTag("destination"))
-                {
-                    if (destPos == other.transform.position) {
-                        UAV1.GetComponent<UAVAgent>().isHold = false;
-                        UAV2.GetComponent<UAVAgent>().isHold = false;
-                        UAV1.GetComponent<UAVAgent>().boxType = 0;
-                        UAV2.GetComponent<UAVAgent>().boxType = 0;
-                        isHold1 = false;
-                        isHold2 = false;
+                if (destPos == other.transform.position) {
+                    UAV1.GetComponent<UAVAgent>().isHold = false;
+                    UAV2.GetComponent<UAVAgent>().isHold = false;
+                    UAV1.GetComponent<UAVAgent>().boxType = 0;
+                    UAV2.GetComponent<UAVAgent>().boxType = 0;
+                    isHold1 = false;
+                    isHold2 = false;
 
-                        UAV1.GetComponent<UAVAgent>().GiveReward(8.0f);
-                        UAV2.GetComponent<UAVAgent>().GiveReward(8.0f);
+                    UAV1.GetComponent<UAVAgent>().GiveReward(8.0f);
+                    UAV2.GetComponent<UAVAgent>().GiveReward(8.0f);
 
-                        Destroy(this);
-                        Destroy(GameObject.Find(other.gameObject.name));
-                    }
+                    Destroy(gameObject);
+                    Destroy(GameObject.Find(other.gameObject.name));
+                    MAP.GetComponent<map>().world[dx, dz] = 0;
                 }
             }
         }

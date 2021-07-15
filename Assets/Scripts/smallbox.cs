@@ -11,9 +11,16 @@ public class smallbox : MonoBehaviour
 
     public Vector3 destPos;
 
+    // MAP
+    public GameObject MAP;
+
+    public int dx, dz;
+
     void Start()
     {
         isHold = false;
+
+        MAP = GameObject.FindGameObjectWithTag("map");
     }
 
     void Update()
@@ -30,7 +37,7 @@ public class smallbox : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         if (!isHold && other.gameObject.CompareTag("uav"))
-        {
+        {   
             UAV = GameObject.Find(other.gameObject.name);
 
             if (!UAV.GetComponent<UAVAgent>().isHold)
@@ -41,6 +48,9 @@ public class smallbox : MonoBehaviour
                 UAV.GetComponent<UAVAgent>().boxType = 1;
                 UAV.GetComponent<UAVAgent>().destinationPos = destPos;
                 UAV.GetComponent<UAVAgent>().GiveReward(1.0f);
+
+                // Spawn new parcel
+                MAP.GetComponent<map>().SpawnSmallBox();
             }
         }
 
@@ -53,8 +63,9 @@ public class smallbox : MonoBehaviour
                 UAV.GetComponent<UAVAgent>().boxType = 0;
                 UAV.GetComponent<UAVAgent>().GiveReward(5.0f);
 
-                Destroy(this);
+                Destroy(gameObject);
                 Destroy(GameObject.Find(other.gameObject.name));
+                MAP.GetComponent<map>().world[dx, dz] = 0;
             }
         }
     }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6369304458451977755
+--- !u!1 &1660945567940250359
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,13 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6226569054576037231}
-  - component: {fileID: -6850782744845854454}
-  - component: {fileID: 3465942962840556674}
+  - component: {fileID: 1660945567940250365}
+  - component: {fileID: 1660945567940250364}
+  - component: {fileID: 1660945567940250363}
+  - component: {fileID: 1660945567940250362}
+  - component: {fileID: 1660945567940250361}
+  - component: {fileID: 1660945567940250360}
+  - component: {fileID: -6286601375855943728}
   m_Layer: 0
   m_Name: bigbox
   m_TagString: parcel
@@ -18,95 +22,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6226569054576037231
+--- !u!4 &1660945567940250365
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6369304458451977755}
+  m_GameObject: {fileID: 1660945567940250359}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.0206485, y: 10.71254, z: -16.233011}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 9004013108547694562}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6850782744845854454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6369304458451977755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acd0387a3b4b6fc49b21581c1bfd48e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UAV: {fileID: 0}
---- !u!114 &3465942962840556674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6369304458451977755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 142d8f3ddc9a4c844bb48cdc196d5158, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &9195696934489344902
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9004013108547694562}
-  - component: {fileID: 1553814667273602554}
-  - component: {fileID: 4683204782350253869}
-  - component: {fileID: 4716340001761337023}
-  - component: {fileID: 7845990450440006552}
-  m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9004013108547694562
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9195696934489344902}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6226569054576037231}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1553814667273602554
+--- !u!33 &1660945567940250364
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9195696934489344902}
+  m_GameObject: {fileID: 1660945567940250359}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4683204782350253869
+--- !u!23 &1660945567940250363
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9195696934489344902}
+  m_GameObject: {fileID: 1660945567940250359}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -141,26 +85,42 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4716340001761337023
+--- !u!65 &1660945567940250362
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9195696934489344902}
+  m_GameObject: {fileID: 1660945567940250359}
   m_Material: {fileID: 13400000, guid: edab50ea54d0fa845a91385620c84693, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &7845990450440006552
+--- !u!114 &1660945567940250361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660945567940250359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 142d8f3ddc9a4c844bb48cdc196d5158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UAV1: {fileID: 0}
+  UAV2: {fileID: 0}
+  destPos: {x: 0, y: 0, z: 0}
+  MAP: {fileID: 0}
+--- !u!54 &1660945567940250360
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9195696934489344902}
+  m_GameObject: {fileID: 1660945567940250359}
   serializedVersion: 2
   m_Mass: 2
   m_Drag: 0
@@ -170,3 +130,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6286601375855943728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660945567940250359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 142d8f3ddc9a4c844bb48cdc196d5158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UAV1: {fileID: 0}
+  UAV2: {fileID: 0}
+  destPos: {x: 0, y: 0, z: 0}
+  MAP: {fileID: 0}

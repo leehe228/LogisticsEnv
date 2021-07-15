@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+// using UnityEngine.UI;
 using UnityEngine;
 
+using PA_DronePack;
 public class map : MonoBehaviour
 {
     // Waiting Queue
@@ -12,6 +14,9 @@ public class map : MonoBehaviour
     public float bigQueueInterval;
     public int maxSmallBoxNum;
     public int maxBigBoxNum;
+
+    public int smallBoxSuccCount;
+    public int bigBoxSuccCount;
 
     // Building Obstacles
     public GameObject buildingPrefab;
@@ -32,8 +37,14 @@ public class map : MonoBehaviour
     int mapSize;
     int numBuilding;
 
+    public int maxEpisodeLen;
+    private int nowEpisodeStep;
+
     // map table array
-    int[,] world;
+    public int[,] world;
+
+    // step Text
+    // public Text text;
 
     void Start()
     {
@@ -47,12 +58,27 @@ public class map : MonoBehaviour
         smallQueueInterval = 20f;
         bigQueueInterval = 20f;
 
-        maxSmallBoxNum = 10;
-        maxBigBoxNum = 5;
+        maxSmallBoxNum = 5;
+        maxBigBoxNum = 3;
 
         mapSize = 40;
-        numBuilding = 15;
+        numBuilding = 10;
 
+        maxEpisodeLen = 3000;
+        nowEpisodeStep = 0;
+
+        smallBoxSuccCount = 0;
+        bigBoxSuccCount = 0;
+
+        // InvokeRepeating("AddSmallBox", 0f, smallQueueInterval);
+        // InvokeRepeating("AddBigBox", 0f, bigQueueInterval);
+
+        // text = GameObject.Find("Text").GetComponent<Text>();
+
+        InitWorld();
+    }
+
+    void InitWorld() {
         // init table
         world = new int[mapSize, mapSize];
         for (int i = 0; i < mapSize; i++) {
@@ -61,13 +87,6 @@ public class map : MonoBehaviour
             }
         }
 
-        // InvokeRepeating("AddSmallBox", 0f, smallQueueInterval);
-        // InvokeRepeating("AddBigBox", 0f, bigQueueInterval);
-
-        InitWorld();
-    }
-
-    void InitWorld() {
         int x1 = Random.Range(0, mapSize);
         int z1 = Random.Range(0, mapSize);
         int x2 = Random.Range(0, mapSize);
@@ -98,8 +117,29 @@ public class map : MonoBehaviour
     }
     
     void Update()
-    {
-        
+    {   
+        // Make this episode done
+        /*if (smallQueuePointer == maxSmallBoxNum && bigQueuePointer == maxBigBoxNum) {
+            GameObject[] uavs = GameObject.FindGameObjectsWithTag("uav");
+
+            foreach (GameObject uav in uavs) {
+                uav.GetComponent<UAVAgent>().MakeEpisodeEnd();
+                InitWorld();
+            }
+        }
+
+        if (nowEpisodeStep > maxEpisodeLen) {
+            GameObject[] uavs = GameObject.FindGameObjectsWithTag("uav");
+
+            foreach (GameObject uav in uavs) {
+                uav.GetComponent<UAVAgent>().MakeEpisodeEnd();
+            }
+        }
+        nowEpisodeStep++;
+
+        text.text = nowEpisodeStep.ToString() + "/" + maxEpisodeLen.ToString();*/
+
+        // text.text = "Episode Info\nSmall Box - 성공 : " + smallBoxSuccCount.ToString() + " / 생성 : " + smallQueuePointer.ToString() + " / 전체 : " + maxSmallBoxNum.ToString() + "\nBig Box - 성공 : " + bigBoxSuccCount.ToString() + " / 생성 : " + bigQueuePointer.ToString() + " / 전체 : " + maxBigBoxNum.ToString();
     }
 
     /*void AddSmallBox() {
@@ -115,42 +155,56 @@ public class map : MonoBehaviour
     }*/
 
     public void SpawnSmallBox() {
-        GameObject boxInstance;
-        GameObject destinationInstance;
-        while (true) {
-            int x = Random.Range(0, mapSize);
-            int z = Random.Range(0, mapSize);
 
-            if (world[x, z] == 0) {
-                boxInstance = Instantiate(smallBoxPrefab);
-                Vector3 hubPos = smallHub.transform.position;
-                hubPos.y += 5f;
-                boxInstance.transform.position = hubPos;
-                destinationInstance = Instantiate(smallDestinationPrefab);
-                destinationInstance.transform.position = new Vector3((float)(x - mapSize / 2), 0f, (float)(z - mapSize / 2));
-                break;
+        if (smallQueuePointer < maxSmallBoxNum) {
+            smallQueuePointer++;
+
+            GameObject boxInstance;
+            GameObject destinationInstance;
+            while (true) {
+                int x = Random.Range(0, mapSize);
+                int z = Random.Range(0, mapSize);
+
+                if (world[x, z] == 0) {
+                    boxInstance = Instantiate(smallBoxPrefab);
+                    Vector3 hubPos = smallHub.transform.position;
+                    hubPos.y += 5f;
+                    boxInstance.transform.position = hubPos;
+                    destinationInstance = Instantiate(smallDestinationPrefab);
+                    destinationInstance.transform.position = new Vector3((float)(x - mapSize / 2), 0f, (float)(z - mapSize / 2));
+                    boxInstance.GetComponent<smallbox>().destPos = destinationInstance.transform.position;
+                    boxInstance.GetComponent<smallbox>().dx = x;
+                    boxInstance.GetComponent<smallbox>().dz = z;
+                    break;
+                }
             }
         }
-        boxInstance.GetComponent<smallbox>().destPos = destinationInstance.transform.position;
     }
 
     public void SpawnBigBox() {
-        GameObject boxInstance;
-        GameObject destinationInstance;
-        while (true) {
-            int x = Random.Range(0, mapSize);
-            int z = Random.Range(0, mapSize);
 
-            if (world[x, z] == 0) {
-                boxInstance = Instantiate(bigBoxPrefab);
-                Vector3 hubPos = bigHub.transform.position;
-                hubPos.y += 5f;
-                boxInstance.transform.position = hubPos;
-                destinationInstance = Instantiate(bigDestinationPrefab);
-                destinationInstance.transform.position = new Vector3((float)(x - mapSize / 2), 0f, (float)(z - mapSize / 2));
-                break;
+        if (bigQueuePointer < maxBigBoxNum) {
+            bigQueuePointer++;
+
+            GameObject boxInstance;
+            GameObject destinationInstance;
+            while (true) {
+                int x = Random.Range(0, mapSize);
+                int z = Random.Range(0, mapSize);
+
+                if (world[x, z] == 0) {
+                    boxInstance = Instantiate(bigBoxPrefab);
+                    Vector3 hubPos = bigHub.transform.position;
+                    hubPos.y += 5f;
+                    boxInstance.transform.position = hubPos;
+                    destinationInstance = Instantiate(bigDestinationPrefab);
+                    destinationInstance.transform.position = new Vector3((float)(x - mapSize / 2), 0f, (float)(z - mapSize / 2));
+                    boxInstance.GetComponent<bigbox>().destPos = destinationInstance.transform.position;
+                    boxInstance.GetComponent<bigbox>().dx = x;
+                    boxInstance.GetComponent<bigbox>().dz = z;
+                    break;
+                }
             }
         }
-        boxInstance.GetComponent<smallbox>().destPos = destinationInstance.transform.position;
     }
 }

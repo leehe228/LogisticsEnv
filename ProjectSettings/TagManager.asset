@@ -10,6 +10,7 @@ TagManager:
   - hub
   - parcel
   - pacel
+  - map
   layers:
   - Default
   - TransparentFX
