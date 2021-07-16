@@ -60,27 +60,27 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1998}
+      Script: {instanceID: 1638}
     - Class: 114
-      Script: {instanceID: 2112}
+      Script: {instanceID: 2000}
     - Class: 114
-      Script: {instanceID: 2188}
+      Script: {instanceID: 2114}
     - Class: 114
-      Script: {instanceID: 2636}
+      Script: {instanceID: 2190}
     - Class: 114
-      Script: {instanceID: 2752}
+      Script: {instanceID: 2638}
     - Class: 114
-      Script: {instanceID: 3188}
+      Script: {instanceID: 2754}
     - Class: 114
-      Script: {instanceID: 3210}
+      Script: {instanceID: 3190}
     - Class: 114
-      Script: {instanceID: 3536}
+      Script: {instanceID: 3212}
     - Class: 114
-      Script: {instanceID: 3794}
+      Script: {instanceID: 3538}
     - Class: 114
-      Script: {instanceID: 4862}
+      Script: {instanceID: 3796}
     - Class: 114
-      Script: {instanceID: 17156}
+      Script: {instanceID: 4864}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -126,6 +126,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: PA_DronePack
     className: PAVR_3DJoystick
+  - hash:
+      serializedVersion: 2
+      Hash: 8b02ecd1b907fc5ec802129b9cdeacfa
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LogisticsAcademy
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -756,12 +762,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.ML-Agents.dll
     namespaceName: Unity.MLAgents.Demonstrations
     className: DemonstrationSummary
-  - hash:
-      serializedVersion: 2
-      Hash: 8b02ecd1b907fc5ec802129b9cdeacfa
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: LogisticsAcademy
   platform: 19
   scenePathNames:
   - Assets/Scenes/Logistics.unity

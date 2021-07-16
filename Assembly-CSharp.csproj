@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\ProfessionalAssets\DronePack\Scripts\PAVR_3DJoystick.cs" />
+     <Compile Include="Assets\Scripts\LogisticsAcademy.cs" />
      <Compile Include="Assets\ProfessionalAssets\DronePack\Scripts\CameraTeleportEffect.cs" />
      <Compile Include="Assets\ProfessionalAssets\DronePack\Scripts\SoccerGame.cs" />
      <Compile Include="Assets\ProfessionalAssets\DronePack\Scripts\Turbine.cs" />
@@ -60,7 +61,6 @@
      <Compile Include="Assets\ProfessionalAssets\DronePack\Scripts\DroneSelection.cs" />
      <Compile Include="Assets\Scripts\map.cs" />
      <Compile Include="Assets\ProfessionalAssets\DronePack\Scripts\ProximityCannon.cs" />
-     <Compile Include="Assets\Scripts\LogisticsAcademy.cs" />
      <None Include="Assets\ProfessionalAssets\DronePack\Shaders\StandardSpecular [DoubleSided].shader" />
      <None Include="Assets\ProfessionalAssets\DronePack\Shaders\StandardShader [DoubleSided].shader" />
      <None Include="Assets\ProfessionalAssets\DronePack\Shaders\UFOAnimated.shader" />

@@ -34,7 +34,7 @@ namespace PA_DronePack
         void Update()
         {
             // Penalty per each frame
-            SetReward(-0.001f);
+            SetReward(-0.0003f);
 
             // if UAV is holding
             if (isHold)
@@ -133,14 +133,66 @@ namespace PA_DronePack
 
         public override void OnActionReceived(float[] vectorAction)
         {
+
+            // Discrete Action
+
+            // Stop
+            if (vectorAction[0] == 1f) {
+                dcoScript.DriveInput(0f);
+                dcoScript.StrafeInput(0f);
+                dcoScript.LiftInput(0f);
+            }
+
+            // forward
+            if (vectorAction[1] == 1f) {
+                dcoScript.DriveInput(1f);
+                dcoScript.StrafeInput(0f);
+                dcoScript.LiftInput(0f);
+            }
+
+            // backward
+            if (vectorAction[2] == 1f) {
+                dcoScript.DriveInput(-1f);
+                dcoScript.StrafeInput(0f);
+                dcoScript.LiftInput(0f);
+            }
+
+            // left
+            if (vectorAction[3] == 1f) {
+                dcoScript.DriveInput(0f);
+                dcoScript.StrafeInput(1f);
+                dcoScript.LiftInput(0f);
+            }
+
+            // right
+            if (vectorAction[4] == 1f) {
+                dcoScript.DriveInput(0f);
+                dcoScript.StrafeInput(-1f);
+                dcoScript.LiftInput(0f);
+            }
+
+            // up
+            if (vectorAction[5] == 1f) {
+                dcoScript.DriveInput(0f);
+                dcoScript.StrafeInput(0f);
+                dcoScript.LiftInput(1f);
+            }
+
+            // down
+            if (vectorAction[6] == 1f) {
+                dcoScript.DriveInput(0f);
+                dcoScript.StrafeInput(0f);
+                dcoScript.LiftInput(-1f);
+            }
+
             // Give Force to Move (Action)
-            dcoScript.DriveInput(Mathf.Clamp(vectorAction[0], -1f, 1f));
+            /*dcoScript.DriveInput(Mathf.Clamp(vectorAction[0], -1f, 1f));
             dcoScript.StrafeInput(Mathf.Clamp(vectorAction[1], -1f, 1f));
-            dcoScript.LiftInput(Mathf.Clamp(vectorAction[2], -1f, 1f));
+            dcoScript.LiftInput(Mathf.Clamp(vectorAction[2], -1f, 1f));*/
 
             // Give Reward following Magnitude between destination and this, when this holds parcel.
             if (isHold) {
-                curDist = (gameObject.transform.position - destinationPos).magnitude;
+                curDist = (destinationPos - gameObject.transform.position).magnitude;
                 float reward = (preDist - curDist) * 0.1f;
                 SetReward(reward);
                 preDist = curDist;
@@ -189,13 +241,13 @@ namespace PA_DronePack
             // collide with another agent
             if (other.gameObject.CompareTag("uav"))
             {
-                SetReward(-0.1f);
+                SetReward(-0.15f);
             }
 
             // collide with obstacles or walls
             if (other.gameObject.CompareTag("obstacle"))
             {
-                SetReward(-0.1f);
+                SetReward(-0.15f);
             }
         }
 

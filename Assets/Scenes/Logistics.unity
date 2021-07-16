@@ -456,9 +456,9 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 34
     NumStackedVectorObservations: 1
-    VectorActionSize: 03000000
+    VectorActionSize: 01000000010000000100000001000000010000000100000001000000
     VectorActionDescriptions: []
-    VectorActionSpaceType: 1
+    VectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 10
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!114 &419991815
 MonoBehaviour:
@@ -996,9 +996,9 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 34
     NumStackedVectorObservations: 1
-    VectorActionSize: 03000000
+    VectorActionSize: 01000000010000000100000001000000010000000100000001000000
     VectorActionDescriptions: []
-    VectorActionSpaceType: 1
+    VectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
@@ -1038,7 +1038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 10
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!120 &909378054
 LineRenderer:
@@ -1456,7 +1456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 10
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!114 &1150412221
 MonoBehaviour:
@@ -1494,9 +1494,9 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 34
     NumStackedVectorObservations: 1
-    VectorActionSize: 03000000
+    VectorActionSize: 01000000010000000100000001000000010000000100000001000000
     VectorActionDescriptions: []
-    VectorActionSpaceType: 1
+    VectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
@@ -2027,7 +2027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 10
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!114 &1550456750
 MonoBehaviour:
@@ -2065,9 +2065,9 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 34
     NumStackedVectorObservations: 1
-    VectorActionSize: 03000000
+    VectorActionSize: 01000000010000000100000001000000010000000100000001000000
     VectorActionDescriptions: []
-    VectorActionSpaceType: 1
+    VectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
@@ -2530,7 +2530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 10
+  DecisionPeriod: 1
   TakeActionsBetweenDecisions: 1
 --- !u!114 &1748256948
 MonoBehaviour:
@@ -2568,9 +2568,9 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 34
     NumStackedVectorObservations: 1
-    VectorActionSize: 03000000
+    VectorActionSize: 01000000010000000100000001000000010000000100000001000000
     VectorActionDescriptions: []
-    VectorActionSpaceType: 1
+    VectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
