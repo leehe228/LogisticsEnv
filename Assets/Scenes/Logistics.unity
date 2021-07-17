@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 340834960}
   m_Layer: 0
   m_Name: top
-  m_TagString: Untagged
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -627,16 +627,17 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  m_RaysPerDirection: 9
+  - wall
+  m_RaysPerDirection: 6
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0
-  m_RayLength: 5.62
+  m_RayLength: 5
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 1, g: 1, b: 1, a: 0.46666667}
+  rayMissColor: {r: 0, g: 0, b: 0, a: 0.46666667}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
 --- !u!1 &639628077
@@ -653,7 +654,7 @@ GameObject:
   - component: {fileID: 639628078}
   m_Layer: 0
   m_Name: wall
-  m_TagString: obstacle
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -969,16 +970,17 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  m_RaysPerDirection: 9
+  - wall
+  m_RaysPerDirection: 6
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0
-  m_RayLength: 8
+  m_RayLength: 5
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 1, g: 1, b: 1, a: 0.46666667}
+  rayMissColor: {r: 0, g: 0, b: 0, a: 0.46666667}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
 --- !u!114 &909378050
@@ -1153,7 +1155,7 @@ GameObject:
   - component: {fileID: 954744624}
   m_Layer: 0
   m_Name: wall
-  m_TagString: obstacle
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1518,16 +1520,17 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  m_RaysPerDirection: 9
+  - wall
+  m_RaysPerDirection: 6
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0
-  m_RayLength: 8
+  m_RayLength: 5
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 1, g: 1, b: 1, a: 0.46666667}
+  rayMissColor: {r: 0, g: 0, b: 0, a: 0.46666667}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
 --- !u!120 &1150412224
@@ -1873,8 +1876,6 @@ MonoBehaviour:
   bigQueuePointer: 0
   smallQueueMaxLen: 0
   bigQueueMaxLen: 0
-  smallQueueInterval: 0
-  bigQueueInterval: 0
   maxSmallBoxNum: 0
   maxBigBoxNum: 0
   smallBoxSuccCount: 0
@@ -2089,16 +2090,17 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  m_RaysPerDirection: 9
+  - wall
+  m_RaysPerDirection: 6
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0
-  m_RayLength: 8
+  m_RayLength: 5
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 1, g: 1, b: 1, a: 0.46666667}
+  rayMissColor: {r: 0, g: 0, b: 0, a: 0.46666667}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
 --- !u!120 &1550456753
@@ -2214,7 +2216,7 @@ GameObject:
   - component: {fileID: 1630381360}
   m_Layer: 0
   m_Name: wall
-  m_TagString: obstacle
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2310,7 +2312,7 @@ GameObject:
   - component: {fileID: 1672261810}
   m_Layer: 0
   m_Name: wall
-  m_TagString: obstacle
+  m_TagString: wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2592,16 +2594,17 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  m_RaysPerDirection: 9
+  - wall
+  m_RaysPerDirection: 6
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0
-  m_RayLength: 8
+  m_RayLength: 5
   m_RayLayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 1, g: 1, b: 1, a: 0.46666667}
+  rayMissColor: {r: 0, g: 0, b: 0, a: 0.46666667}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
 --- !u!120 &1748256951

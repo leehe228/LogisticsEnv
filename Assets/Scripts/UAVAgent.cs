@@ -119,15 +119,15 @@ namespace PA_DronePack
             // destination or hub position ( x 6 )
             if (isHold) {
                 sensor.AddObservation(destinationPos);
-                sensor.AddObservation((gameObject.transform.position - destinationPos).magnitude);
+                sensor.AddObservation((destinationPos - gameObject.transform.position).magnitude);
                 sensor.AddObservation(0f);
                 sensor.AddObservation(0f);
             }
             else {
                 sensor.AddObservation(Vector3.zero);
                 sensor.AddObservation(0f);
-                sensor.AddObservation((gameObject.transform.position - MAP.GetComponent<map>().bigHub.transform.position).magnitude);
-                sensor.AddObservation((gameObject.transform.position - MAP.GetComponent<map>().smallHub.transform.position).magnitude);
+                sensor.AddObservation((MAP.GetComponent<map>().bigHub.transform.position - gameObject.transform.position).magnitude);
+                sensor.AddObservation((MAP.GetComponent<map>().smallHub.transform.position - gameObject.transform.position).magnitude);
             }
         }
 
@@ -193,7 +193,15 @@ namespace PA_DronePack
             // Give Reward following Magnitude between destination and this, when this holds parcel.
             if (isHold) {
                 curDist = (destinationPos - gameObject.transform.position).magnitude;
-                float reward = (preDist - curDist) * 0.1f;
+                float reward = (preDist - curDist) * 0.2f;
+                SetReward(reward);
+                preDist = curDist;
+            }
+            else {
+                float smallHubDist = (MAP.GetComponent<map>().smallHub.transform.position - gameObject.transform.position).magnitude;
+                float bigHubDist = (MAP.GetComponent<map>().bigHub.transform.position - gameObject.transform.position).magnitude;
+                curDist = Mathf.Min(smallHubDist, bigHubDist);
+                float reward = (preDist - curDist) * 0.2f;
                 SetReward(reward);
                 preDist = curDist;
             }
@@ -241,13 +249,13 @@ namespace PA_DronePack
             // collide with another agent
             if (other.gameObject.CompareTag("uav"))
             {
-                SetReward(-0.15f);
+                SetReward(-0.3f);
             }
 
             // collide with obstacles or walls
-            if (other.gameObject.CompareTag("obstacle"))
+            if (other.gameObject.CompareTag("obstacle") || other.gameObject.CompareTag("wall"))
             {
-                SetReward(-0.15f);
+                SetReward(-0.3f);
             }
         }
 

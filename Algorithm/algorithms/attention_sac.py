@@ -5,6 +5,8 @@ from utils.misc import soft_update, hard_update, enable_gradients, disable_gradi
 from utils.agents import AttentionAgent
 from utils.critics import AttentionCritic
 
+from UnityEnv import UnityEnv
+
 MSELoss = torch.nn.MSELoss()
 
 class AttentionSAC(object):
@@ -242,10 +244,10 @@ class AttentionSAC(object):
         """
         agent_init_params = []
         sa_size = []
-        for _ in range(env.nagent):
-            agent_init_params.append({'num_in_pol': 91,
-                                      'num_out_pol': env.action_space})
-            sa_size.append((91, env.action_space))
+        for _ in range(5):
+            agent_init_params.append({'num_in_pol': 86,
+                                      'num_out_pol': 7})
+            sa_size.append((86, 7))
 
         init_dict = {'gamma': gamma, 'tau': tau,
                      'pi_lr': pi_lr, 'q_lr': q_lr,

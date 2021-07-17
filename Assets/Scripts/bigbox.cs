@@ -37,8 +37,8 @@ public class bigbox : MonoBehaviour
                 UAV2.GetComponent<UAVAgent>().isHold = false;
                 UAV1.GetComponent<UAVAgent>().boxType = 0;
                 UAV2.GetComponent<UAVAgent>().boxType = 0;
-                UAV1.GetComponent<UAVAgent>().GiveReward(-0.8f);
-                UAV2.GetComponent<UAVAgent>().GiveReward(-0.8f);
+                UAV1.GetComponent<UAVAgent>().GiveReward(-1f);
+                UAV2.GetComponent<UAVAgent>().GiveReward(-1f);
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
                 GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             }
@@ -54,12 +54,12 @@ public class bigbox : MonoBehaviour
 
         if (isHold1 && !isHold2)
         {
-            if (Vector3.Distance(UAV1.transform.position, gameObject.transform.position) > 2.5f) {
+            if (Vector3.Distance(UAV1.transform.position, gameObject.transform.position) > 5f) {
                 isHold1 = false;
                 UAV1.GetComponent<UAVAgent>().isHold = false;
                 UAV1.GetComponent<UAVAgent>().boxType = 0;
 
-                UAV1.GetComponent<UAVAgent>().GiveReward(-0.5f);
+                UAV1.GetComponent<UAVAgent>().GiveReward(-1f);
             } 
         }
     }
@@ -79,7 +79,7 @@ public class bigbox : MonoBehaviour
                     UAV1.GetComponent<UAVAgent>().boxType = 2;
                     UAV1.GetComponent<UAVAgent>().destinationPos = destPos;
                     
-                    UAV1.GetComponent<UAVAgent>().GiveReward(1.0f);
+                    UAV1.GetComponent<UAVAgent>().GiveReward(2f);
                 }
             }
         }
@@ -97,8 +97,8 @@ public class bigbox : MonoBehaviour
                     UAV2.GetComponent<UAVAgent>().boxType = 2;
                     UAV2.GetComponent<UAVAgent>().destinationPos = destPos;
                     
-                    UAV1.GetComponent<UAVAgent>().GiveReward(1.0f);
-                    UAV2.GetComponent<UAVAgent>().GiveReward(2.0f);
+                    UAV1.GetComponent<UAVAgent>().GiveReward(2f);
+                    UAV2.GetComponent<UAVAgent>().GiveReward(4f);
 
                     // Spawn new parcel
                     MAP.GetComponent<map>().SpawnBigBox();
@@ -118,8 +118,8 @@ public class bigbox : MonoBehaviour
                     isHold1 = false;
                     isHold2 = false;
 
-                    UAV1.GetComponent<UAVAgent>().GiveReward(8.0f);
-                    UAV2.GetComponent<UAVAgent>().GiveReward(8.0f);
+                    UAV1.GetComponent<UAVAgent>().GiveReward(10.0f);
+                    UAV2.GetComponent<UAVAgent>().GiveReward(10.0f);
 
                     Destroy(gameObject);
                     Destroy(GameObject.Find(other.gameObject.name));

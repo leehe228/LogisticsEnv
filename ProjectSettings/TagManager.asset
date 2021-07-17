@@ -11,6 +11,7 @@ TagManager:
   - parcel
   - pacel
   - map
+  - wall
   layers:
   - Default
   - TransparentFX

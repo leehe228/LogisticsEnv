@@ -58,10 +58,10 @@ class ReplayBuffer(object):
                 observations[:, agent_i])
             # actions are already batched by agent, so they are indexed differently
             self.ac_buffs[agent_i][self.curr_i:self.curr_i + nentries] = actions[agent_i]
-            self.rew_buffs[agent_i][self.curr_i:self.curr_i + nentries] = rewards[agent_i]
+            self.rew_buffs[agent_i][self.curr_i:self.curr_i + nentries] = rewards[:, agent_i]
             self.next_obs_buffs[agent_i][self.curr_i:self.curr_i + nentries] = np.vstack(
                 next_observations[:, agent_i])
-            self.done_buffs[agent_i][self.curr_i:self.curr_i + nentries] = dones[agent_i]
+            self.done_buffs[agent_i][self.curr_i:self.curr_i + nentries] = dones[:, agent_i]
         self.curr_i += nentries
         if self.filled_i < self.max_steps:
             self.filled_i += nentries

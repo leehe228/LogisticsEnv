@@ -10,8 +10,6 @@ public class map : MonoBehaviour
     public int smallQueuePointer, bigQueuePointer;
     public int smallQueueMaxLen;
     public int bigQueueMaxLen;
-    public float smallQueueInterval;
-    public float bigQueueInterval;
     public int maxSmallBoxNum;
     public int maxBigBoxNum;
 
@@ -49,26 +47,14 @@ public class map : MonoBehaviour
     void Start()
     {
         // set parameters
-        smallQueuePointer = 0;
-        bigQueuePointer = 0;
-
         smallQueueMaxLen = 3;
         bigQueueMaxLen = 3;
-
-        smallQueueInterval = 20f;
-        bigQueueInterval = 20f;
 
         maxSmallBoxNum = 10;
         maxBigBoxNum = 6;
 
         mapSize = 40;
         numBuilding = 10;
-
-        maxEpisodeLen = 3000;
-        nowEpisodeStep = 0;
-
-        smallBoxSuccCount = 0;
-        bigBoxSuccCount = 0;
 
         // InvokeRepeating("AddSmallBox", 0f, smallQueueInterval);
         // InvokeRepeating("AddBigBox", 0f, bigQueueInterval);
@@ -79,6 +65,12 @@ public class map : MonoBehaviour
     }
 
     public void InitWorld() {
+
+        smallQueuePointer = 0;
+        bigQueuePointer = 0;
+
+        smallBoxSuccCount = 0;
+        bigBoxSuccCount = 0;
 
         // delete all
         GameObject[] hubs = GameObject.FindGameObjectsWithTag("hub");
@@ -118,6 +110,7 @@ public class map : MonoBehaviour
         int z2 = Random.Range(0, mapSize);
         world[x1, z1] = 1;
         world[x2, z2] = 1;
+        
         smallHub = Instantiate(smallHubPrefab);
         bigHub = Instantiate(bigHubPrefab);
         smallHub.transform.position = new Vector3((float)(x1 - mapSize / 2), 0f, (float)(z1 - mapSize / 2));

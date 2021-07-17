@@ -25,7 +25,7 @@ class UnityEnv(object):
 
         self.nagent = len(list(decision_steps))
 
-        self.agent = list(decision_steps)
+        self.agents = list(decision_steps)
 
 
     def reshape_obs(self, decision_steps):

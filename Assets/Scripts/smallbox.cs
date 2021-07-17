@@ -47,7 +47,7 @@ public class smallbox : MonoBehaviour
                 UAV.GetComponent<UAVAgent>().isHold = true;
                 UAV.GetComponent<UAVAgent>().boxType = 1;
                 UAV.GetComponent<UAVAgent>().destinationPos = destPos;
-                UAV.GetComponent<UAVAgent>().GiveReward(1.0f);
+                UAV.GetComponent<UAVAgent>().GiveReward(2f);
 
                 // Spawn new parcel
                 MAP.GetComponent<map>().SpawnSmallBox();
