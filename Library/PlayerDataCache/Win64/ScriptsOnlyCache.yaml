@@ -7,6 +7,7 @@ ScriptsOnlyBuild:
     - PA_DronePack.PA_ObjectID
     - PA_DronePack.UAVAgent
     - bigbox
+    - gridSensor
     - map
     - smallbox
     Unity.ML-Agents.dll:
@@ -80,7 +81,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3796}
     - Class: 114
-      Script: {instanceID: 4864}
+      Script: {instanceID: 4682}
+    - Class: 114
+      Script: {instanceID: 4866}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -704,6 +707,12 @@ ScriptsOnlyBuild:
     className: TMP_SubMeshUI
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: gridSensor
+  - hash:
+      serializedVersion: 2
       Hash: fd68d84f33fad85aac38f2739c0ee270
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -716,7 +725,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: df5605b1f469b8d725ab47d98752756b
+      Hash: 75c6c1df4239d4ec0a15068386cb5e4a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: map
@@ -765,4 +774,4 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/Logistics.unity
-  playerPath: D:/UnityProjects/Logistics/Build/Logistics.exe
+  playerPath: D:/UnityProjects/Logistics_Grid/Build/Logistics.exe

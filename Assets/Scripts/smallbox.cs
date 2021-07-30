@@ -47,21 +47,23 @@ public class smallbox : MonoBehaviour
                 UAV.GetComponent<UAVAgent>().isHold = true;
                 UAV.GetComponent<UAVAgent>().boxType = 1;
                 UAV.GetComponent<UAVAgent>().destinationPos = destPos;
-                UAV.GetComponent<UAVAgent>().GiveReward(2f);
+                UAV.GetComponent<UAVAgent>().GiveReward(20f);
 
                 // Spawn new parcel
                 MAP.GetComponent<map>().SpawnSmallBox();
+            }
+            else {
+                UAV = null;
             }
         }
 
         if (other.gameObject.CompareTag("destination"))
         {
-            if (destPos == other.transform.position)
-            {
+            if (destPos == other.transform.position && other.gameObject.name.Contains("small_dest")) {
                 isHold = false;
                 UAV.GetComponent<UAVAgent>().isHold = false;
                 UAV.GetComponent<UAVAgent>().boxType = 0;
-                UAV.GetComponent<UAVAgent>().GiveReward(5.0f);
+                UAV.GetComponent<UAVAgent>().GiveReward(20f);
 
                 Destroy(gameObject);
                 Destroy(GameObject.Find(other.gameObject.name));

@@ -26,6 +26,7 @@ public class map : MonoBehaviour
     public GameObject bigDestinationPrefab;
     public GameObject smallHubPrefab;
     public GameObject bigHubPrefab;
+    public GameObject gridPrefab;
 
     // Hub Instance
     public GameObject smallHub;
@@ -41,25 +42,17 @@ public class map : MonoBehaviour
     // map table array
     public int[,] world;
 
-    // step Text
-    // public Text text;
-
     void Start()
     {
         // set parameters
         smallQueueMaxLen = 3;
         bigQueueMaxLen = 3;
 
-        maxSmallBoxNum = 10;
-        maxBigBoxNum = 6;
+        maxSmallBoxNum = 100;
+        maxBigBoxNum = 100;
 
-        mapSize = 40;
-        numBuilding = 10;
-
-        // InvokeRepeating("AddSmallBox", 0f, smallQueueInterval);
-        // InvokeRepeating("AddBigBox", 0f, bigQueueInterval);
-
-        // text = GameObject.Find("Text").GetComponent<Text>();
+        mapSize = 13;
+        numBuilding = 3;
 
         InitWorld();
     }
@@ -124,7 +117,7 @@ public class map : MonoBehaviour
                 if (world[x, z] == 0) {
                     world[x, z] = 1;
                     GameObject building = Instantiate(buildingPrefab);
-                    building.transform.position = new Vector3((float)(x - mapSize / 2), Random.Range(-2f, 5f), (float)(z - mapSize / 2));
+                    building.transform.position = new Vector3((float)(x - mapSize / 2), Random.Range(0f, 1f), (float)(z - mapSize / 2));
                     break;
                 }
             }
@@ -136,41 +129,8 @@ public class map : MonoBehaviour
     
     void Update()
     {   
-        // Make this episode done
-        /*if (smallQueuePointer == maxSmallBoxNum && bigQueuePointer == maxBigBoxNum) {
-            GameObject[] uavs = GameObject.FindGameObjectsWithTag("uav");
-
-            foreach (GameObject uav in uavs) {
-                uav.GetComponent<UAVAgent>().MakeEpisodeEnd();
-                InitWorld();
-            }
-        }
-
-        if (nowEpisodeStep > maxEpisodeLen) {
-            GameObject[] uavs = GameObject.FindGameObjectsWithTag("uav");
-
-            foreach (GameObject uav in uavs) {
-                uav.GetComponent<UAVAgent>().MakeEpisodeEnd();
-            }
-        }
-        nowEpisodeStep++;
-
-        text.text = nowEpisodeStep.ToString() + "/" + maxEpisodeLen.ToString();*/
-
-        // text.text = "Episode Info\nSmall Box - 성공 : " + smallBoxSuccCount.ToString() + " / 생성 : " + smallQueuePointer.ToString() + " / 전체 : " + maxSmallBoxNum.ToString() + "\nBig Box - 성공 : " + bigBoxSuccCount.ToString() + " / 생성 : " + bigQueuePointer.ToString() + " / 전체 : " + maxBigBoxNum.ToString();
+        
     }
-
-    /*void AddSmallBox() {
-        if (smallQueuePointer < smallQueueMaxLen) {
-            smallQueuePointer++;
-        }
-    }*/
-
-    /*void AddBigBox() {
-        if (bigQueuePointer < bigQueueMaxLen) {
-            bigQueuePointer++;
-        }
-    }*/
 
     public void SpawnSmallBox() {
 
@@ -188,7 +148,9 @@ public class map : MonoBehaviour
                     Vector3 hubPos = smallHub.transform.position;
                     hubPos.y += 5f;
                     boxInstance.transform.position = hubPos;
+                    boxInstance.name = "small_box(" + x.ToString() + "," + z.ToString() + ")";
                     destinationInstance = Instantiate(smallDestinationPrefab);
+                    destinationInstance.name = "small_dest(" + x.ToString() + "," + z.ToString() + ")";
                     destinationInstance.transform.position = new Vector3((float)(x - mapSize / 2), 0f, (float)(z - mapSize / 2));
                     boxInstance.GetComponent<smallbox>().destPos = destinationInstance.transform.position;
                     boxInstance.GetComponent<smallbox>().dx = x;
@@ -215,7 +177,9 @@ public class map : MonoBehaviour
                     Vector3 hubPos = bigHub.transform.position;
                     hubPos.y += 5f;
                     boxInstance.transform.position = hubPos;
+                    boxInstance.name = "big_box(" + x.ToString() + "," + z.ToString() + ")";
                     destinationInstance = Instantiate(bigDestinationPrefab);
+                    destinationInstance.name = "big_dest(" + x.ToString() + "," + z.ToString() + ")";
                     destinationInstance.transform.position = new Vector3((float)(x - mapSize / 2), 0f, (float)(z - mapSize / 2));
                     boxInstance.GetComponent<bigbox>().destPos = destinationInstance.transform.position;
                     boxInstance.GetComponent<bigbox>().dx = x;

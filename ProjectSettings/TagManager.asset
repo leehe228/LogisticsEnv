@@ -12,6 +12,7 @@ TagManager:
   - pacel
   - map
   - wall
+  - grid
   layers:
   - Default
   - TransparentFX
