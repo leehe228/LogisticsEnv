@@ -99,15 +99,6 @@ namespace PA_DronePack
             sensor.AddObservation(gameObject.transform.position);
             sensor.AddObservation(gameObject.GetComponent<Rigidbody>().velocity);
             // sensor.AddObservation(gameObject.GetComponent<Rigidbody>().angularVelocity);
-            
-            // other uavs position, distance ( 4 x (num_of_uavs - 1) )
-            GameObject[] uavs = GameObject.FindGameObjectsWithTag("uav");
-            foreach (GameObject uav in uavs) {
-                if (uav.gameObject.name != gameObject.name) {
-                    sensor.AddObservation(uav.transform.position);
-                    sensor.AddObservation((uav.transform.position - gameObject.transform.position).magnitude);
-                }
-            }
 
             // box Type ( x 3 )
             if (boxType == 2) {
@@ -126,6 +117,32 @@ namespace PA_DronePack
                 sensor.AddObservation(0f);
             }
             
+            // other uavs position, distance ( 7 x (num_of_uavs - 1) )
+            GameObject[] uavs = GameObject.FindGameObjectsWithTag("uav");
+            foreach (GameObject uav in uavs) {
+                if (uav.gameObject.name != gameObject.name) {
+                    sensor.AddObservation(uav.transform.position);
+                    sensor.AddObservation((uav.transform.position - gameObject.transform.position).magnitude);
+
+                    // other uav action (one-hot)
+                    int boxtype = uav.GetComponent<UAVAgent>().boxType;
+                    if (boxtype == 2) {
+                        sensor.AddObservation(0f);
+                        sensor.AddObservation(0f);
+                        sensor.AddObservation(1f);
+                    }
+                    else if (boxtype == 1) {
+                        sensor.AddObservation(0f);
+                        sensor.AddObservation(1f);
+                        sensor.AddObservation(0f);
+                    }
+                    else {
+                        sensor.AddObservation(1f);
+                        sensor.AddObservation(0f);
+                        sensor.AddObservation(0f);
+                    }
+                }
+            }
 
             // hub position ( x 6 )
             sensor.AddObservation(MAP.GetComponent<map>().bigHub.transform.position);
@@ -134,6 +151,33 @@ namespace PA_DronePack
             // hub destination ( x 2 )
             sensor.AddObservation((MAP.GetComponent<map>().bigHub.transform.position - gameObject.transform.position).magnitude);
             sensor.AddObservation((MAP.GetComponent<map>().smallHub.transform.position - gameObject.transform.position).magnitude);
+
+            // Find nearest boxes
+            GameObject[] boxes = GameObject.FindGameObjectsWithTag("parcel");
+
+            GameObject minBigBox = null;
+            GameObject minSmallBox = null;
+            float minBigBoxDist = 10000f;
+            float minSmallBoxDist = 10000f;
+
+            foreach (GameObject b in boxes) {
+                if (b.name.Contains("big") && (gameObject.transform.position - b.transform.position).magnitude < minBigBoxDist) {
+                    minBigBox = b;
+                    minBigBoxDist = (gameObject.transform.position - b.transform.position).magnitude;
+                }
+                else if (b.name.Contains("small") && (gameObject.transform.position - b.transform.position).magnitude < minBigBoxDist) {
+                    minSmallBox = b;
+                    minSmallBoxDist = (gameObject.transform.position - b.transform.position).magnitude;
+                }
+            }
+
+            // nearest box position ( x 6 )
+            sensor.AddObservation(minBigBox.transform.position);
+            sensor.AddObservation(minSmallBox.transform.position);
+
+            // nearest box destination ( x 2 )
+            sensor.AddObservation(minBigBoxDist);
+            sensor.AddObservation(minSmallBoxDist);
             
             
             // destination position and distance ( x 4 )

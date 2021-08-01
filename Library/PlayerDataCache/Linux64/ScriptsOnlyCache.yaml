@@ -774,4 +774,4 @@ ScriptsOnlyBuild:
   platform: 24
   scenePathNames:
   - Assets/Scenes/Logistics.unity
-  playerPath: D:/UnityProjects/Logistics_Grid/Build_Linux/Logistics.x86_64
+  playerPath: D:/UnityProjects/Logistics_Grid/Build_Linux_Desktop3/Logistics.x86_64

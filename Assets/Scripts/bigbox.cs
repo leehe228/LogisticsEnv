@@ -98,8 +98,7 @@ public class bigbox : MonoBehaviour
             if (other.gameObject.CompareTag("uav"))
             {
                 UAV2 = GameObject.Find(other.gameObject.name);
-                if (!UAV2.GetComponent<UAVAgent>().isHold)
-                {
+                if (!UAV2.GetComponent<UAVAgent>().isHold) {
                     isHold2 = true;
                     UAV2.GetComponent<UAVAgent>().boxPos = gameObject.transform.position;
                     UAV2.GetComponent<UAVAgent>().isHold = true;
