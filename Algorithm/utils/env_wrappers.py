@@ -95,7 +95,7 @@ class DummyVecEnv(VecEnv):
         self.envs = [fn() for fn in env_fns]
         env = self.envs[0]        
         VecEnv.__init__(self, len(env_fns), env.observation_space, env.action_space)
-        self.agent_types = ['agent' for _ in env.agents]
+        self.agent_types = ['agent' for _ in range(env.nagent)]
         self.ts = np.zeros(len(self.envs), dtype='int')        
         self.actions = None
 

@@ -157,8 +157,8 @@ namespace PA_DronePack
 
             GameObject minBigBox = null;
             GameObject minSmallBox = null;
-            float minBigBoxDist = 10000f;
-            float minSmallBoxDist = 10000f;
+            float minBigBoxDist = 50f;
+            float minSmallBoxDist = 50f;
 
             foreach (GameObject b in boxes) {
                 if (b.name.Contains("big") && (gameObject.transform.position - b.transform.position).magnitude < minBigBoxDist) {
@@ -171,13 +171,21 @@ namespace PA_DronePack
                 }
             }
 
-            // nearest box position ( x 6 )
-            sensor.AddObservation(minBigBox.transform.position);
-            sensor.AddObservation(minSmallBox.transform.position);
+            if (minSmallBox && minBigBox) {
+                // nearest box position ( x 6 )
+                sensor.AddObservation(minBigBox.transform.position);
+                sensor.AddObservation(minSmallBox.transform.position);
 
-            // nearest box destination ( x 2 )
-            sensor.AddObservation(minBigBoxDist);
-            sensor.AddObservation(minSmallBoxDist);
+                // nearest box destination ( x 2 )
+                sensor.AddObservation(minBigBoxDist);
+                sensor.AddObservation(minSmallBoxDist);
+            } 
+            else {
+                sensor.AddObservation(Vector3.zero);
+                sensor.AddObservation(Vector3.zero);
+                sensor.AddObservation(0f);
+                sensor.AddObservation(0f);
+            }
             
             
             // destination position and distance ( x 4 )

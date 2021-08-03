@@ -11,7 +11,7 @@ from utils.buffer import ReplayBuffer
 from utils.env_wrappers import SubprocVecEnv, DummyVecEnv
 from algorithms.attention_sac import AttentionSAC
 
-from UnityEnv import UnityEnv
+from UnityGymWrapper import GymEnv
 
 import mlagents
 from mlagents_envs.environment import UnityEnvironment
@@ -20,7 +20,7 @@ from mlagents_envs.environment import UnityEnvironment
 def make_parallel_env(env_id, n_rollout_threads, seed):
     def get_env_fn(rank):
         def init_env():
-            env = UnityEnv("../Build/" + env_id)
+            env = GymEnv(name="../Build/Logistics")
             np.random.seed(seed + rank * 1000)
             return env
         return init_env
@@ -56,8 +56,8 @@ def run(config):
     model = AttentionSAC.init_from_env(env, tau=config["tau"], pi_lr=config["pi_lr"], q_lr=config["q_lr"], gamma=config["gamma"], pol_hidden_dim=config["pol_hidden_dim"], critic_hidden_dim=config["critic_hidden_dim"], attend_heads=config["attend_heads"], reward_scale=config["reward_scale"])
 
     replay_buffer = ReplayBuffer(config["buffer_length"], model.nagents,
-                                 [86 for _ in range(5)],
-                                 [env.action_space for _ in range(5)])
+                                 [obsp[0] for obsp in env.observation_space],
+                                 [acsp for acsp in env.action_space])
     t = 0
     for ep_i in range(0, config["n_episodes"], config["n_rollout_threads"]):
         # print("Episodes %i-%i of %i" % (ep_i + 1, ep_i + 1 + config["n_rollout_threads"], config["n_episodes"]))
@@ -81,10 +81,11 @@ def run(config):
             next_obs, rewards, done, info = env.step(actions)
             replay_buffer.push(obs, agent_actions, rewards, next_obs, done)
 
-            for i in range(5):
+            for i in range(env.nagent):
                 episode_rewards[i] += rewards[0][i]
             
-            print("step : %4d/%4d | rewards : %.4f %.4f %.4f %.4f %.4f " % (step, config["episode_length"], *episode_rewards), end='\r')
+            if step % 10 == 0:
+                print("step : %4d/%4d | rewards : %.4f %.4f %.4f %.4f %.4f " % (step, config["episode_length"], *episode_rewards), end='\r')
 
             obs = next_obs
             t += config["n_rollout_threads"]
@@ -103,7 +104,7 @@ def run(config):
                     model.update_all_targets()
                 model.prep_rollouts(device='cpu')
 
-        print("episode : %6d/%6d | rewards : %.4f %.4f %.4f %.4f %.4f " % (ep_i, config["n_episodes"], *episode_rewards), end='\n\n')
+        print("episode : %8d/%8d | rewards : %.4f %.4f %.4f %.4f %.4f " % (ep_i, config["n_episodes"], *episode_rewards), end='\n\n')
 
         ep_rews = replay_buffer.get_average_rewards(
             config["episode_length"] * config["n_rollout_threads"])
@@ -131,11 +132,11 @@ if __name__ == '__main__':
     config["n_rollout_threads"] = 1
     config["buffer_length"] = int(1e6)
     config["n_episodes"] = 5_000_000
-    config["episode_length"] = 500
-    config["steps_per_update"] = 100
-    config["num_updates"] = 4
+    config["episode_length"] = 1000 # 25
+    config["steps_per_update"] = 250 # 100
+    config["num_updates"] = 2 # 4
     config["batch_size"] = 1024
-    config["save_interval"] = 1000
+    config["save_interval"] = 5000
     config["pol_hidden_dim"] = 128
     config["critic_hidden_dim"] = 128
     config["attend_heads"] = 4
@@ -144,6 +145,6 @@ if __name__ == '__main__':
     config["tau"] = 0.001
     config["gamma"] = 0.99
     config["reward_scale"] = 100.0
-    config["use_gpu"] = False
+    config["use_gpu"] = True
 
     run(config)
