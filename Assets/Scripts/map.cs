@@ -51,8 +51,8 @@ public class map : MonoBehaviour
         maxSmallBoxNum = 100;
         maxBigBoxNum = 100;
 
-        mapSize = 13;
-        numBuilding = 3;
+        mapSize = 13; // 13
+        numBuilding = 3; // 3
 
         InitWorld();
     }
