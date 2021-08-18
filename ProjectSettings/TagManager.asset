@@ -13,6 +13,7 @@ TagManager:
   - map
   - wall
   - grid
+  - station
   layers:
   - Default
   - TransparentFX

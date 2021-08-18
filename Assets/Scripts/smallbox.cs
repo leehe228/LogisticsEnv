@@ -32,6 +32,25 @@ public class smallbox : MonoBehaviour
             gameObject.transform.position = uavPos;
             UAV.GetComponent<UAVAgent>().boxPos = gameObject.transform.position;
         }
+
+        /*if (UAV) {
+            if (!UAV.GetComponent<UAVAgent>().isHold) {
+                UAV = null;
+                isHold = false;
+
+                Vector3 temp = MAP.GetComponent<map>().smallHub.transform.position;
+                temp.y = 5f;
+                gameObject.transform.position = temp;
+                gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+        }*/
+
+        if (gameObject.transform.position.y < -3f) {
+            Vector3 temp = gameObject.transform.position;
+            temp.y = 5f;
+            gameObject.transform.position = temp;
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
     }
 
     void OnCollisionEnter(Collision other)
@@ -68,6 +87,7 @@ public class smallbox : MonoBehaviour
                 Destroy(gameObject);
                 Destroy(GameObject.Find(other.gameObject.name));
                 MAP.GetComponent<map>().world[dx, dz] = 0;
+                MAP.GetComponent<map>().smallBoxSuccCount++;
             }
         }
     }

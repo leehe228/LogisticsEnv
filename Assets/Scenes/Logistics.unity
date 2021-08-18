@@ -235,6 +235,10 @@ PrefabInstance:
       value: UAV1
       objectReference: {fileID: 0}
     - target: {fileID: 1165740686982719177, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1165740686982719177, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: m_TagString
       value: uav
       objectReference: {fileID: 0}
@@ -295,8 +299,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: motorOn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: headless
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: leftSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: riseSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: lowerSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: rightSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: backwardSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7341894752857769161, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: m_RootOrder
@@ -362,7 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 49
+    VectorObservationSize: 57
     NumStackedVectorObservations: 1
     VectorActionSize: 01000000010000000100000001000000010000000100000001000000
     VectorActionDescriptions: []
@@ -520,7 +548,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &419991824
+--- !u!114 &419991818
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -544,7 +572,7 @@ MonoBehaviour:
     m_Bits: 4294967291
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 0, g: 0, b: 0, a: 0.46666667}
+  rayMissColor: {r: 0, g: 0, b: 0, a: 1}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
 --- !u!1001 &650292216
@@ -629,6 +657,26 @@ PrefabInstance:
     - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: headless
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: leftSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: riseSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: lowerSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: rightSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: backwardSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7341894752857769161, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: m_RootOrder
@@ -789,7 +837,6 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  - wall
   m_RaysPerDirection: 4
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.15
@@ -799,7 +846,7 @@ MonoBehaviour:
     m_Bits: 4294967291
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 0, g: 0, b: 0, a: 0.46666667}
+  rayMissColor: {r: 0, g: 0, b: 0, a: 1}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
 --- !u!114 &909378050
@@ -815,7 +862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 49
+    VectorObservationSize: 57
     NumStackedVectorObservations: 1
     VectorActionSize: 01000000010000000100000001000000010000000100000001000000
     VectorActionDescriptions: []
@@ -1043,6 +1090,72 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 33, y: -45, z: 0}
+--- !u!1 &1095118187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1095118190}
+  - component: {fileID: 1095118189}
+  - component: {fileID: 1095118188}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1095118188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095118187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1095118189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095118187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &1095118190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095118187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1150412218
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1125,6 +1238,26 @@ PrefabInstance:
     - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: headless
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: leftSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: riseSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: lowerSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: rightSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: backwardSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7341894752857769161, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: m_RootOrder
@@ -1225,7 +1358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 49
+    VectorObservationSize: 57
     NumStackedVectorObservations: 1
     VectorActionSize: 01000000010000000100000001000000010000000100000001000000
     VectorActionDescriptions: []
@@ -1251,7 +1384,6 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  - wall
   m_RaysPerDirection: 4
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.15
@@ -1261,7 +1393,7 @@ MonoBehaviour:
     m_Bits: 4294967291
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 0, g: 0, b: 0, a: 0.46666667}
+  rayMissColor: {r: 0, g: 0, b: 0, a: 1}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
 --- !u!120 &1150412224
@@ -1363,6 +1495,85 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!1 &1257739911
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1257739912}
+  - component: {fileID: 1257739914}
+  - component: {fileID: 1257739913}
+  m_Layer: 5
+  m_Name: InfoText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1257739912
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257739911}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1686054439}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 105.58966, y: 266.49997}
+  m_SizeDelta: {x: 211.1793, y: 533}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1257739913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257739911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 10
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 7
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: ---
+--- !u!222 &1257739914
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257739911}
+  m_CullTransparentMesh: 1
 --- !u!1 &1518737773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,14 +1617,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85433cf5477b1ae42bcb09b11241341c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallQueuePointer: 0
-  bigQueuePointer: 0
-  smallQueueMaxLen: 0
-  bigQueueMaxLen: 0
   maxSmallBoxNum: 0
   maxBigBoxNum: 0
   smallBoxSuccCount: 0
   bigBoxSuccCount: 0
+  smallSpawnCount: 0
+  bigSpawnCount: 0
   buildingPrefab: {fileID: 8185163433332185471, guid: 78871c9479ab9064d91a9a196dcb15a2, type: 3}
   smallBoxPrefab: {fileID: 4532888348219210831, guid: 382743cea53872e4c8b6b5a332c018a6, type: 3}
   bigBoxPrefab: {fileID: 1660945567940250359, guid: 17a3d361ad7feb942abedc9e38a5db88, type: 3}
@@ -1425,6 +1634,8 @@ MonoBehaviour:
   smallHub: {fileID: 0}
   bigHub: {fileID: 0}
   maxEpisodeLen: 0
+  infoText: {fileID: 1257739913}
+  seconds: 0
 --- !u!1001 &1550456747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1482,7 +1693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6445124561591980756, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: forwardBackward
-      value: Vertical
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6445124561591980756, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: strafeLeftRight
@@ -1507,6 +1718,26 @@ PrefabInstance:
     - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: headless
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: leftSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: riseSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: lowerSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: rightSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: backwardSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7341894752857769161, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: m_RootOrder
@@ -1607,7 +1838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 49
+    VectorObservationSize: 57
     NumStackedVectorObservations: 1
     VectorActionSize: 01000000010000000100000001000000010000000100000001000000
     VectorActionDescriptions: []
@@ -1633,7 +1864,6 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  - wall
   m_RaysPerDirection: 4
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.15
@@ -1643,7 +1873,7 @@ MonoBehaviour:
     m_Bits: 4294967291
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 0, g: 0, b: 0, a: 0.46666667}
+  rayMissColor: {r: 0, g: 0, b: 0, a: 1}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
 --- !u!120 &1550456753
@@ -1745,6 +1975,106 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!1 &1686054435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1686054439}
+  - component: {fileID: 1686054438}
+  - component: {fileID: 1686054437}
+  - component: {fileID: 1686054436}
+  m_Layer: 5
+  m_Name: Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1686054436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686054435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1686054437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686054435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &1686054438
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686054435}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &1686054439
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686054435}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 1257739912}
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1001 &1748256945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1827,6 +2157,26 @@ PrefabInstance:
     - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: headless
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: leftSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: riseSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: lowerSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: rightSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7113575461345001769, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      propertyPath: backwardSpeed
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7341894752857769161, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       propertyPath: m_RootOrder
@@ -1927,7 +2277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 49
+    VectorObservationSize: 57
     NumStackedVectorObservations: 1
     VectorActionSize: 01000000010000000100000001000000010000000100000001000000
     VectorActionDescriptions: []
@@ -1953,7 +2303,6 @@ MonoBehaviour:
   m_SensorName: RayUAV
   m_DetectableTags:
   - obstacle
-  - wall
   m_RaysPerDirection: 4
   m_MaxRayDegrees: 180
   m_SphereCastRadius: 0.15
@@ -1963,7 +2312,7 @@ MonoBehaviour:
     m_Bits: 4294967291
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
-  rayMissColor: {r: 0, g: 0, b: 0, a: 0.46666667}
+  rayMissColor: {r: 0, g: 0, b: 0, a: 1}
   m_StartVerticalOffset: 0
   m_EndVerticalOffset: 0
 --- !u!120 &1748256951

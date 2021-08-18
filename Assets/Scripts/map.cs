@@ -1,20 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
-// using UnityEngine.UI;
+using UnityEngine.UI;
 using UnityEngine;
 
 using PA_DronePack;
 public class map : MonoBehaviour
 {
     // Waiting Queue
-    public int smallQueuePointer, bigQueuePointer;
-    public int smallQueueMaxLen;
-    public int bigQueueMaxLen;
     public int maxSmallBoxNum;
     public int maxBigBoxNum;
 
     public int smallBoxSuccCount;
     public int bigBoxSuccCount;
+
+    public int smallSpawnCount;
+    public int bigSpawnCount;
 
     // Building Obstacles
     public GameObject buildingPrefab;
@@ -27,10 +27,12 @@ public class map : MonoBehaviour
     public GameObject smallHubPrefab;
     public GameObject bigHubPrefab;
     public GameObject gridPrefab;
+    // public GameObject ChargingStationPrefab;
 
     // Hub Instance
     public GameObject smallHub;
     public GameObject bigHub;
+    // public GameObject chargingStation;
 
     // map parameter
     int mapSize;
@@ -42,34 +44,46 @@ public class map : MonoBehaviour
     // map table array
     public int[,] world;
 
+    public Text infoText;
+
+    public float seconds;
+
     void Start()
     {
         // set parameters
-        smallQueueMaxLen = 3;
-        bigQueueMaxLen = 3;
+        smallSpawnCount = 0;
+        bigSpawnCount = 0;
 
         maxSmallBoxNum = 100;
         maxBigBoxNum = 100;
 
-        mapSize = 13; // 13
-        numBuilding = 3; // 3
+        mapSize = 13;
+        numBuilding = 3;
 
-        InitWorld();
+        InitWorld(mapSize, numBuilding);
     }
 
-    public void InitWorld() {
+    public void InitWorld(int ms, int nb) {
+        
+        mapSize = ms;
+        numBuilding = nb;
 
-        smallQueuePointer = 0;
-        bigQueuePointer = 0;
+        infoText.text = "";
+
+        smallSpawnCount = 0;
+        bigSpawnCount = 0;
 
         smallBoxSuccCount = 0;
         bigBoxSuccCount = 0;
+
+        seconds = 0f;
 
         // delete all
         GameObject[] hubs = GameObject.FindGameObjectsWithTag("hub");
         GameObject[] destinations = GameObject.FindGameObjectsWithTag("destination");
         GameObject[] parcels = GameObject.FindGameObjectsWithTag("parcel");
         GameObject[] buildings = GameObject.FindGameObjectsWithTag("obstacle");
+        // GameObject[] stations = GameObject.FindGameObjectsWithTag("station");
 
         foreach (GameObject hub in hubs) {
             Destroy(hub);
@@ -88,6 +102,10 @@ public class map : MonoBehaviour
                 Destroy(building);
             }
         }
+
+        /*foreach(GameObject station in stations) {
+            Destroy(station);
+        }*/
 
         // init table
         world = new int[mapSize, mapSize];
@@ -123,19 +141,42 @@ public class map : MonoBehaviour
             }
         }
 
+        /*while (true) {
+            int x = Random.Range(0, mapSize);
+            int z = Random.Range(0, mapSize);
+
+            if (world[x, z] == 0) {
+                world[x, z] = 1;
+                chargingStation = Instantiate(ChargingStationPrefab);
+                chargingStation.transform.position = new Vector3((float)(x - mapSize / 2), 0f, (float)(z - mapSize / 2));
+                break;
+            }
+        }*/
+
         SpawnSmallBox();
         SpawnBigBox();
     }
     
     void Update()
     {   
+        // Set InfoText
+        /*GameObject[] uavs = GameObject.FindGameObjectsWithTag("uav");
         
+        // stopwatch
+        seconds += Time.deltaTime;
+        string text = "<Time>\n" + Mathf.Round(seconds).ToString() + "s\n\n<UAVs Information>\n";
+        
+        foreach (GameObject uav in uavs) {
+            text += uav.name + "\nBox Type : " + uav.GetComponent<UAVAgent>().boxType + " / Energy : " + (Mathf.Round(uav.GetComponent<UAVAgent>().energy ) ).ToString() + "%\n\n";
+        }*/
+
+        infoText.text = "<Number of successes>\nsmall box : " + smallBoxSuccCount.ToString() + "\nbig box : " + bigBoxSuccCount.ToString() + "\n";
     }
 
     public void SpawnSmallBox() {
 
-        if (smallQueuePointer < maxSmallBoxNum) {
-            smallQueuePointer++;
+        if (smallSpawnCount < maxSmallBoxNum) {
+            smallSpawnCount++;
 
             GameObject boxInstance;
             GameObject destinationInstance;
@@ -163,8 +204,8 @@ public class map : MonoBehaviour
 
     public void SpawnBigBox() {
 
-        if (bigQueuePointer < maxBigBoxNum) {
-            bigQueuePointer++;
+        if (bigSpawnCount < maxBigBoxNum) {
+            bigSpawnCount++;
 
             GameObject boxInstance;
             GameObject destinationInstance;

@@ -39,6 +39,9 @@ public class bigbox : MonoBehaviour
                 UAV2.GetComponent<UAVAgent>().boxType = 0;
                 UAV1.GetComponent<UAVAgent>().GiveReward(-15f);
                 UAV2.GetComponent<UAVAgent>().GiveReward(-15f);
+                Vector3 temp = MAP.GetComponent<map>().bigHub.transform.position;
+                temp.y = 5f;
+                gameObject.transform.position = temp;
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
                 GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
@@ -67,6 +70,58 @@ public class bigbox : MonoBehaviour
 
                 UAV1 = null;
             } 
+        }
+
+        if (!isHold1 && isHold2)
+        {
+            if ((UAV2.transform.position - gameObject.transform.position).magnitude > 5f) {
+                isHold1 = false;
+                isHold2 = false;
+                UAV2.GetComponent<UAVAgent>().isHold = false;
+                UAV2.GetComponent<UAVAgent>().boxType = 0;
+
+                UAV2.GetComponent<UAVAgent>().GiveReward(-8f);
+
+                UAV2 = null;
+            } 
+        }
+
+        /*if (UAV1) {
+            if (!UAV1.GetComponent<UAVAgent>().isHold) {
+                
+                if (UAV2) {
+                    if (UAV2.GetComponent<UAVAgent>().isHold) {
+                        UAV1 = UAV2;
+                        isHold1 = isHold2;
+                    }
+                }
+                UAV2 = null;
+                isHold2 = false;
+
+                Vector3 temp = MAP.GetComponent<map>().bigHub.transform.position;
+                temp.y = 5f;
+                gameObject.transform.position = temp;
+                gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+        }
+
+        if (UAV2) {
+            if (!UAV2.GetComponent<UAVAgent>().isHold) {
+                UAV2 = null;
+                isHold2 = false;
+
+                Vector3 temp = MAP.GetComponent<map>().bigHub.transform.position;
+                temp.y = 5f;
+                gameObject.transform.position = temp;
+                gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+        }*/
+
+        if (gameObject.transform.position.y < -3f) {
+            Vector3 temp = gameObject.transform.position;
+            temp.y = 5f;
+            gameObject.transform.position = temp;
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
 
@@ -135,6 +190,7 @@ public class bigbox : MonoBehaviour
                     Destroy(gameObject);
                     Destroy(GameObject.Find(other.gameObject.name));
                     MAP.GetComponent<map>().world[dx, dz] = 0;
+                    MAP.GetComponent<map>().bigBoxSuccCount++;
 
                     UAV1 = null;
                     UAV2 = null;
