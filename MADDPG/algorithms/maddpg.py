@@ -240,22 +240,17 @@ class MADDPG(object):
                      atype in env.agent_types]
         for acsp, obsp, algtype in zip(env.action_space, env.observation_space,
                                        alg_types):
-            num_in_pol = obsp.shape[0]
-            if isinstance(acsp, Box):
-                discrete_action = False
-                get_shape = lambda x: x.shape[0]
-            else:  # Discrete
-                discrete_action = True
-                get_shape = lambda x: x.n
-            num_out_pol = get_shape(acsp)
+            num_in_pol = obsp[0]
+            discrete_action = True
+            num_out_pol = acsp
             if algtype == "MADDPG":
                 num_in_critic = 0
                 for oobsp in env.observation_space:
-                    num_in_critic += oobsp.shape[0]
+                    num_in_critic += oobsp[0]
                 for oacsp in env.action_space:
-                    num_in_critic += get_shape(oacsp)
+                    num_in_critic += oacsp
             else:
-                num_in_critic = obsp.shape[0] + get_shape(acsp)
+                num_in_critic = obsp[0] + acsp
             agent_init_params.append({'num_in_pol': num_in_pol,
                                       'num_out_pol': num_out_pol,
                                       'num_in_critic': num_in_critic})

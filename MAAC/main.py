@@ -131,7 +131,7 @@ if __name__ == '__main__':
     config["model_name"] = "MAAC"
     config["n_rollout_threads"] = 1
     config["buffer_length"] = int(1e6)
-    config["n_episodes"] = 5_000_000
+    config["n_episodes"] = 30000
     config["episode_length"] = 1000 # 25
     config["steps_per_update"] = 250 # 100
     config["num_updates"] = 2 # 4

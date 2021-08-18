@@ -104,7 +104,6 @@ class GymEnv(object):
     
     # obs, reward, done, info <- step(actions)
     def step(self, actions):
-        
         lastidx = 0
         for _i in range(self.nbehavior):
             self.env.set_actions(behavior_name=self.behavior_names[_i], action=actions[lastidx:lastidx + self.n_each_agent[_i], :])
