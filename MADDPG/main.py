@@ -12,7 +12,7 @@ from utils.buffer import ReplayBuffer
 from utils.env_wrappers import SubprocVecEnv, DummyVecEnv
 from algorithms.maddpg import MADDPG
 
-from UnityGymWrapper import GymEnv
+from UnityGymWrapper4 import GymEnv
 from mlagents_envs.environment import UnityEnvironment
 
 USE_CUDA = False  # torch.cuda.is_available()
@@ -20,7 +20,7 @@ USE_CUDA = False  # torch.cuda.is_available()
 def make_parallel_env(env_id, n_rollout_threads, seed):
     def get_env_fn(rank):
         def init_env():
-            env = GymEnv(name="../Build_window/Logistics")
+            env = GymEnv(name="../Build/Logistics")
             np.random.seed(seed + rank * 1000)
             return env
         return init_env
@@ -85,7 +85,6 @@ def run(config):
             agent_actions = [ac.data.numpy() for ac in torch_agent_actions]
             # rearrange actions to be per environment
             actions = np.array([[ac[i] for ac in agent_actions] for i in range(config["n_rollout_threads"])])
-            
 
             next_obs, rewards, dones, infos = env.step(actions)
             replay_buffer.push(obs, agent_actions, rewards, next_obs, dones)
@@ -93,7 +92,7 @@ def run(config):
             for i in range(env.nagent):
                 episode_rewards[i] += rewards[0][i]
 
-            if step % 10 == 0:
+            if step % 100 == 0:
                 print("step : %4d/%4d | rewards : %.4f %.4f %.4f %.4f %.4f " % (step, config["episode_length"], *episode_rewards), end='\r')
             
             obs = next_obs
@@ -112,6 +111,9 @@ def run(config):
                         maddpg.update(sample, a_i, logger=logger)
                     maddpg.update_all_targets()
                 maddpg.prep_rollouts(device='cpu')
+
+        print("episode : %8d/%8d | rewards : %.4f %.4f %.4f %.4f %.4f " % (ep_i, config["n_episodes"], *episode_rewards), end='\n\n')
+
         ep_rews = replay_buffer.get_average_rewards(
             config["episode_length"] * config["n_rollout_threads"])
         for a_i, a_ep_rew in enumerate(ep_rews):

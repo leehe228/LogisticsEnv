@@ -84,7 +84,7 @@ def run(config):
             for i in range(env.nagent):
                 episode_rewards[i] += rewards[0][i]
             
-            if step % 10 == 0:
+            if step % 100 == 0:
                 print("step : %4d/%4d | rewards : %.4f %.4f %.4f %.4f %.4f " % (step, config["episode_length"], *episode_rewards), end='\r')
 
             obs = next_obs

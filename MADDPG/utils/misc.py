@@ -1,5 +1,6 @@
 import os
 import torch
+from torch._C import device
 import torch.nn.functional as F
 import torch.distributed as dist
 from torch.autograd import Variable
@@ -70,7 +71,8 @@ def sample_gumbel(shape, eps=1e-20, tens_type=torch.FloatTensor):
 # modified for PyTorch from https://github.com/ericjang/gumbel-softmax/blob/master/Categorical%20VAE.ipynb
 def gumbel_softmax_sample(logits, temperature):
     """ Draw a sample from the Gumbel-Softmax distribution"""
-    y = logits + sample_gumbel(logits.shape, tens_type=type(logits.data))
+    temp = sample_gumbel(logits.shape, tens_type=type(logits.data))
+    y = logits + (temp.cuda() if logits.device != temp.device else temp)
     return F.softmax(y / temperature, dim=1)
 
 # modified for PyTorch from https://github.com/ericjang/gumbel-softmax/blob/master/Categorical%20VAE.ipynb
