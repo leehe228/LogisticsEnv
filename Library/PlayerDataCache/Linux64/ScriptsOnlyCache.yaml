@@ -11,7 +11,6 @@ ScriptsOnlyBuild:
     - map
     - smallbox
     Unity.ML-Agents.dll:
-    - Unity.MLAgents.Agent
     - Unity.MLAgents.DecisionRequester
     - Unity.MLAgents.Policies.BehaviorParameters
     - Unity.MLAgents.Sensors.RayPerceptionSensorComponent3D
@@ -68,41 +67,39 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1530}
+      Script: {instanceID: 1646}
     - Class: 114
-      Script: {instanceID: 1638}
+      Script: {instanceID: 2008}
     - Class: 114
-      Script: {instanceID: 2000}
+      Script: {instanceID: 2122}
     - Class: 114
-      Script: {instanceID: 2114}
+      Script: {instanceID: 2172}
     - Class: 114
-      Script: {instanceID: 2164}
+      Script: {instanceID: 2198}
     - Class: 114
-      Script: {instanceID: 2190}
+      Script: {instanceID: 2552}
     - Class: 114
-      Script: {instanceID: 2544}
+      Script: {instanceID: 2646}
     - Class: 114
-      Script: {instanceID: 2638}
+      Script: {instanceID: 2694}
     - Class: 114
-      Script: {instanceID: 2686}
+      Script: {instanceID: 2762}
     - Class: 114
-      Script: {instanceID: 2754}
+      Script: {instanceID: 2902}
     - Class: 114
-      Script: {instanceID: 2894}
+      Script: {instanceID: 3154}
     - Class: 114
-      Script: {instanceID: 3146}
+      Script: {instanceID: 3198}
     - Class: 114
-      Script: {instanceID: 3190}
+      Script: {instanceID: 3220}
     - Class: 114
-      Script: {instanceID: 3212}
+      Script: {instanceID: 3548}
     - Class: 114
-      Script: {instanceID: 3540}
+      Script: {instanceID: 3806}
     - Class: 114
-      Script: {instanceID: 3798}
+      Script: {instanceID: 4692}
     - Class: 114
-      Script: {instanceID: 4684}
-    - Class: 114
-      Script: {instanceID: 4868}
+      Script: {instanceID: 4876}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -224,7 +221,7 @@ ScriptsOnlyBuild:
     className: SoccerGame
   - hash:
       serializedVersion: 2
-      Hash: e4a5c1dd0e9bfd90a7c8ed7e9b843d01
+      Hash: be01a014ffb2484e6cdfdca7c5af1eed
     assemblyName: Unity.ML-Agents.dll
     namespaceName: Unity.MLAgents.Policies
     className: BehaviorParameters
@@ -272,7 +269,7 @@ ScriptsOnlyBuild:
     className: Text
   - hash:
       serializedVersion: 2
-      Hash: 073dd1f7abe35cd59a76340e02197726
+      Hash: c32784aa4223d927a69dbdcd6f969064
     assemblyName: Assembly-CSharp.dll
     namespaceName: PA_DronePack
     className: UAVAgent
@@ -344,7 +341,7 @@ ScriptsOnlyBuild:
     className: PA_ObjectID
   - hash:
       serializedVersion: 2
-      Hash: e1237ad6386e516b14751d54c83d3471
+      Hash: 5313aabfeb9a420655b4f15dc4aff040
     assemblyName: Unity.ML-Agents.dll
     namespaceName: Unity.MLAgents.Sensors
     className: RenderTextureSensorComponent
@@ -428,7 +425,7 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: 4e911433915684674eb30b798ed78a3e
+      Hash: daab9926a3a56f97180afd52b09f5307
     assemblyName: Unity.ML-Agents.dll
     namespaceName: Unity.MLAgents.Demonstrations
     className: DemonstrationRecorder
@@ -656,7 +653,7 @@ ScriptsOnlyBuild:
     className: Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 2cd31c0dbdb9d644f16baa3547a634ae
+      Hash: bc307d070edf4f5bf960c0d1696cce98
     assemblyName: Unity.ML-Agents.dll
     namespaceName: Unity.MLAgents.Sensors
     className: CameraSensorComponent
@@ -800,47 +797,11 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
-      Hash: 8c6e48ab23009638149489605a7da0ba
+      Hash: afd242f4d08fe7134b665c272625419c
     assemblyName: Unity.ML-Agents.dll
     namespaceName: Unity.MLAgents.Demonstrations
     className: DemonstrationSummary
-  - hash:
-      serializedVersion: 2
-      Hash: 6235526a5e1b58f13dbd7ca1d8edd1b4
-    assemblyName: Unity.ML-Agents.dll
-    namespaceName: Unity.MLAgents.Sensors
-    className: VectorSensorComponent
-  - hash:
-      serializedVersion: 2
-      Hash: e35e7183e89d279c3e0db1c6098b7d87
-    assemblyName: Unity.ML-Agents.dll
-    namespaceName: Unity.MLAgents.Integrations.Match3
-    className: Match3ActuatorComponent
-  - hash:
-      serializedVersion: 2
-      Hash: 8214f1934370ba1e4dd13b41b088bed4
-    assemblyName: Unity.ML-Agents.dll
-    namespaceName: Unity.MLAgents.Sensors
-    className: GridSensorComponent
-  - hash:
-      serializedVersion: 2
-      Hash: 947811fb1874e8cae582473f3af70981
-    assemblyName: Unity.ML-Agents.dll
-    namespaceName: Unity.MLAgents.Sensors
-    className: BufferSensorComponent
-  - hash:
-      serializedVersion: 2
-      Hash: 41e297c231f699948db64f04d5fba060
-    assemblyName: Unity.ML-Agents.dll
-    namespaceName: Unity.MLAgents
-    className: MLAgentsSettings
-  - hash:
-      serializedVersion: 2
-      Hash: 686b3497e8cc9456d6fb80c15d366347
-    assemblyName: Unity.ML-Agents.dll
-    namespaceName: Unity.MLAgents.Integrations.Match3
-    className: Match3SensorComponent
   platform: 24
   scenePathNames:
   - Assets/Scenes/Logistics.unity
-  playerPath: D:/UnityProjects/Logistics/Build_sb/Logistics.x86_64
+  playerPath: D:/Github/LogisticsEnv/Build_Linux/Logistics.x86_64
