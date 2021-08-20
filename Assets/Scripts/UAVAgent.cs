@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Actuators;
+// using Unity.MLAgents.Actuators;
 
 namespace PA_DronePack
 {
@@ -30,6 +30,8 @@ namespace PA_DronePack
         // public float energyRate = 0.12f;
 
         GameObject MAP;
+
+        public List<string[]> rowData = new List<string[]>();
 
         void Start()
         {
@@ -223,7 +225,8 @@ namespace PA_DronePack
             // sensor.AddObservation((gameObject.transform.position - MAP.GetComponent<map>().chargingStation.transform.position).magnitude);
         }
 
-        public override void OnActionReceived(ActionBuffers actionBuffers)
+        // public override void OnActionReceived(ActionBuffers actionBuffers)
+        public override void OnActionReceived(float[] vectorAction)
         {   
             /*if (!isCharging) {
                 if (energy > 0f) {
@@ -250,32 +253,32 @@ namespace PA_DronePack
             float lift = 0;
             
             // forward
-            if (actionBuffers.DiscreteActions[1] == 1) {
+            if (vectorAction[1] == 1f) {
                 drive = 1f;
             }
 
             // backward
-            else if (actionBuffers.DiscreteActions[2] == 1) {
+            else if (vectorAction[2] == 1f) {
                 drive = -1f;
             }
 
             // left
-            if (actionBuffers.DiscreteActions[3] == 1) {
+            if (vectorAction[3] == 1f) {
                 strafe = 1f;
             }
 
             // right
-            if (actionBuffers.DiscreteActions[4] == 1) {
+            if (vectorAction[4] == 1f) {
                 strafe = -1f;
             }
 
             // up
-            if (actionBuffers.DiscreteActions[5] == 1) {
+            if (vectorAction[5] == 1f) {
                 lift = 1f;
             }
 
             // down
-            if (actionBuffers.DiscreteActions[6] == 1) {
+            if (vectorAction[6] == 1f) {
                 lift = -1f;
             }
 
@@ -358,40 +361,41 @@ namespace PA_DronePack
         }
 
         // Player Heuristic Controll
-        public override void Heuristic(in ActionBuffers actionsOut)
+        // public override void Heuristic(in ActionBuffers actionsOut)
+        public override void Heuristic(float[] actionsOut)
         {
-            var discreteActionsOut = actionsOut.DiscreteActions;
+            // var discreteActionsOut = actionsOut.DiscreteActions;
             
-            discreteActionsOut[0] = 0;
-            discreteActionsOut[1] = 0;
-            discreteActionsOut[2] = 0;
-            discreteActionsOut[3] = 0;
-            discreteActionsOut[4] = 0;
-            discreteActionsOut[5] = 0;
-            discreteActionsOut[6] = 0;
+            actionsOut[0] = 0f;
+            actionsOut[1] = 0f;
+            actionsOut[2] = 0f;
+            actionsOut[3] = 0f;
+            actionsOut[4] = 0f;
+            actionsOut[5] = 0f;
+            actionsOut[6] = 0f;
 
             // forward, backward
             if (Input.GetKey(KeyCode.W)) {
-                discreteActionsOut[1] = 1;
+                actionsOut[1] = 1f;
             }
             if (Input.GetKey(KeyCode.S)) {
-                discreteActionsOut[2] = 1;
+                actionsOut[2] = 1f;
             }
    
             // left, right
             if (Input.GetKey(KeyCode.D)) {
-                discreteActionsOut[3] = 1;
+                actionsOut[3] = 1f;
             }
             if (Input.GetKey(KeyCode.A)) {
-                discreteActionsOut[4] = 1;
+                actionsOut[4] = 1f;
             }
 
             // up, down
             if (Input.GetKey(KeyCode.Q)) {
-                discreteActionsOut[5] = 1;
+                actionsOut[5] = 1f;
             }
             if (Input.GetKey(KeyCode.E)) {
-                discreteActionsOut[6] = 1;
+                actionsOut[6] = 1f;
             }
         }
 
