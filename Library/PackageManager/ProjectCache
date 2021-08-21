@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637650240977784930
-    m_Hash: 1970786163
+      ticks: 637650708926383873
+    m_Hash: 2444143486
   m_LockFileStatus:
     m_FilePath: D:/Github/LogisticsEnv/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637650240978384981
-    m_Hash: 2433148664
+      ticks: 637650708927162306
+    m_Hash: 4281258281
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -391,12 +391,12 @@ m_PackageAssets:
         url: https://github.cds.internal.unity3d.com/unity/com.unity.ide.vscode.git
         revision: b5ec9b38109e52b1b26597d521e4df75e042ebb9
         path: 
-    - packageId: com.unity.ml-agents@1.0.8
+    - packageId: com.unity.ml-agents@2.1.0-exp.1
       testable: 0
       isDirectDependency: 1
-      version: 1.0.8
+      version: 2.1.0-exp.1
       source: 1
-      resolvedPath: D:\Github\LogisticsEnv\Library\PackageCache\com.unity.ml-agents@1.0.8
+      resolvedPath: D:\Github\LogisticsEnv\Library\PackageCache\com.unity.ml-agents@2.1.0-exp.1
       assetPath: Packages/com.unity.ml-agents
       name: com.unity.ml-agents
       displayName: ML Agents
@@ -468,35 +468,21 @@ m_PackageAssets:
         verified: 1.0.8
       dependencies:
       - name: com.unity.barracuda
-        version: 1.0.4
+        version: 2.0.0-pre.3
       - name: com.unity.modules.imageconversion
         version: 1.0.0
       - name: com.unity.modules.jsonserialize
         version: 1.0.0
-      - name: com.unity.modules.physics
-        version: 1.0.0
-      - name: com.unity.modules.physics2d
-        version: 1.0.0
-      - name: com.unity.modules.unityanalytics
-        version: 1.0.0
       resolvedDependencies:
       - name: com.unity.barracuda
-        version: 1.0.4
+        version: 2.0.0-pre.3
       - name: com.unity.burst
         version: 1.3.4
       - name: com.unity.mathematics
         version: 1.2.1
-      - name: com.unity.modules.imageconversion
-        version: 1.0.0
       - name: com.unity.modules.jsonserialize
         version: 1.0.0
-      - name: com.unity.modules.physics
-        version: 1.0.0
-      - name: com.unity.modules.physics2d
-        version: 1.0.0
-      - name: com.unity.modules.unityanalytics
-        version: 1.0.0
-      - name: com.unity.modules.unitywebrequest
+      - name: com.unity.modules.imageconversion
         version: 1.0.0
       keywords: []
       registry:
@@ -511,13 +497,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637577177000000000
+      datePublishedTicks: 637588727510000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
         url: git+https://github.com/Unity-Technologies/ml-agents.git
-        revision: 402b51a6fbdb167113414f66a5eea7807f3e9bb8
+        revision: c1b26d49e4f4fc692c2688531f9e7c69dba12682
         path: 
     - packageId: com.unity.test-framework@1.1.26
       testable: 0
@@ -3026,12 +3012,12 @@ m_PackageAssets:
         url: https://github.cds.internal.unity3d.com/unity/com.unity.ext.nunit.git
         revision: 29ea4d6504a5f58fb3a6934db839aa80ae6d9d88
         path: 
-    - packageId: com.unity.barracuda@1.0.4
+    - packageId: com.unity.barracuda@2.0.0-pre.3
       testable: 0
       isDirectDependency: 0
-      version: 1.0.4
+      version: 2.0.0-pre.3
       source: 1
-      resolvedPath: D:\Github\LogisticsEnv\Library\PackageCache\com.unity.barracuda@1.0.4
+      resolvedPath: D:\Github\LogisticsEnv\Library\PackageCache\com.unity.barracuda@2.0.0-pre.3
       assetPath: Packages/com.unity.barracuda
       name: com.unity.barracuda
       displayName: Barracuda
@@ -3118,11 +3104,19 @@ m_PackageAssets:
       dependencies:
       - name: com.unity.burst
         version: 1.3.4
+      - name: com.unity.modules.jsonserialize
+        version: 1.0.0
+      - name: com.unity.modules.imageconversion
+        version: 1.0.0
       resolvedDependencies:
       - name: com.unity.burst
         version: 1.3.4
       - name: com.unity.mathematics
         version: 1.2.1
+      - name: com.unity.modules.jsonserialize
+        version: 1.0.0
+      - name: com.unity.modules.imageconversion
+        version: 1.0.0
       keywords: []
       registry:
         id: main
@@ -3136,13 +3130,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637387965950000000
+      datePublishedTicks: 637556478870000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
         url: https://github.cds.internal.unity3d.com/unity/UnityInferenceEngine.git
-        revision: e0c35b7a32eeec86709cb14c4006cf12fefae1a8
+        revision: a736a888543dc62d81960b3e8405c1ff35d375b3
         path: 
     - packageId: com.unity.nuget.newtonsoft-json@2.0.0
       testable: 0

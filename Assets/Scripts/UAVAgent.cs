@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
-// using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Actuators;
 
 namespace PA_DronePack
 {
@@ -225,8 +225,7 @@ namespace PA_DronePack
             // sensor.AddObservation((gameObject.transform.position - MAP.GetComponent<map>().chargingStation.transform.position).magnitude);
         }
 
-        // public override void OnActionReceived(ActionBuffers actionBuffers)
-        public override void OnActionReceived(float[] vectorAction)
+        public override void OnActionReceived(ActionBuffers actionBuffers)
         {   
             /*if (!isCharging) {
                 if (energy > 0f) {
@@ -250,35 +249,35 @@ namespace PA_DronePack
             // Discrete Action
             float drive = 0f;
             float strafe = 0f;
-            float lift = 0;
+            float lift = 0f;
             
             // forward
-            if (vectorAction[1] == 1f) {
+            if (actionBuffers.DiscreteActions[1] == 1) {
                 drive = 1f;
             }
 
             // backward
-            else if (vectorAction[2] == 1f) {
+            else if (actionBuffers.DiscreteActions[2] == 1) {
                 drive = -1f;
             }
 
             // left
-            if (vectorAction[3] == 1f) {
+            if (actionBuffers.DiscreteActions[3] == 1) {
                 strafe = 1f;
             }
 
             // right
-            if (vectorAction[4] == 1f) {
+            if (actionBuffers.DiscreteActions[4] == 1) {
                 strafe = -1f;
             }
 
             // up
-            if (vectorAction[5] == 1f) {
+            if (actionBuffers.DiscreteActions[5] == 1) {
                 lift = 1f;
             }
 
             // down
-            if (vectorAction[6] == 1f) {
+            if (actionBuffers.DiscreteActions[6] == 1) {
                 lift = -1f;
             }
 
@@ -361,41 +360,40 @@ namespace PA_DronePack
         }
 
         // Player Heuristic Controll
-        // public override void Heuristic(in ActionBuffers actionsOut)
-        public override void Heuristic(float[] actionsOut)
+        public override void Heuristic(in ActionBuffers actionsOut)
         {
-            // var discreteActionsOut = actionsOut.DiscreteActions;
+            var discreteActionsOut = actionsOut.DiscreteActions;
             
-            actionsOut[0] = 0f;
-            actionsOut[1] = 0f;
-            actionsOut[2] = 0f;
-            actionsOut[3] = 0f;
-            actionsOut[4] = 0f;
-            actionsOut[5] = 0f;
-            actionsOut[6] = 0f;
+            discreteActionsOut[0] = 0;
+            discreteActionsOut[1] = 0;
+            discreteActionsOut[2] = 0;
+            discreteActionsOut[3] = 0;
+            discreteActionsOut[4] = 0;
+            discreteActionsOut[5] = 0;
+            discreteActionsOut[6] = 0;
 
             // forward, backward
             if (Input.GetKey(KeyCode.W)) {
-                actionsOut[1] = 1f;
+                discreteActionsOut[1] = 1;
             }
             if (Input.GetKey(KeyCode.S)) {
-                actionsOut[2] = 1f;
+                discreteActionsOut[2] = 1;
             }
    
             // left, right
             if (Input.GetKey(KeyCode.D)) {
-                actionsOut[3] = 1f;
+                discreteActionsOut[3] = 1;
             }
             if (Input.GetKey(KeyCode.A)) {
-                actionsOut[4] = 1f;
+                discreteActionsOut[4] = 1;
             }
 
             // up, down
             if (Input.GetKey(KeyCode.Q)) {
-                actionsOut[5] = 1f;
+                discreteActionsOut[5] = 1;
             }
             if (Input.GetKey(KeyCode.E)) {
-                actionsOut[6] = 1f;
+                discreteActionsOut[6] = 1;
             }
         }
 

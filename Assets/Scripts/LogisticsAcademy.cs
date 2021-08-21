@@ -22,6 +22,7 @@ public class LogisticsAcademy : MonoBehaviour
     }
 
     public void EnvironmentReset() {
+        MAP.GetComponent<map>().WriteCSV();
         MAP.GetComponent<map>().InitWorld(mapsize, numbuilding);
     }
 }

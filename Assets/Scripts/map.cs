@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using System.IO;
 
 using PA_DronePack;
 public class map : MonoBehaviour
@@ -48,8 +49,10 @@ public class map : MonoBehaviour
 
     public float seconds;
 
-    void Start()
-    {
+    public string starttime = System.DateTime.Now.ToString("yyyyMMddHHmmss");
+    public string filepath;
+
+    public void Awake() {
         // set parameters
         smallSpawnCount = 0;
         bigSpawnCount = 0;
@@ -59,6 +62,16 @@ public class map : MonoBehaviour
 
         mapSize = 13;
         numBuilding = 3;
+
+        if (!Directory.Exists("./CSV/")) {
+            Directory.CreateDirectory("./CSV/");
+        }
+
+        filepath = "./CSV/count" + starttime + ".csv";
+
+        if (!File.Exists(filepath)) {
+            File.Create(filepath);
+        }
 
         InitWorld(mapSize, numBuilding);
     }
@@ -171,6 +184,12 @@ public class map : MonoBehaviour
         }*/
 
         infoText.text = "<Number of successes>\nsmall box : " + smallBoxSuccCount.ToString() + "\nbig box : " + bigBoxSuccCount.ToString() + "\n";
+    }
+
+    public void WriteCSV() {
+        string countstr = smallBoxSuccCount.ToString() + "," + bigBoxSuccCount.ToString() + "," + (smallBoxSuccCount.ToString() + bigBoxSuccCount.ToString()).ToString() + "\n";
+        
+        File.AppendAllText(filepath, countstr);
     }
 
     public void SpawnSmallBox() {

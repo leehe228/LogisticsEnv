@@ -1,8 +1,6 @@
-import argparse
 import torch
 import os
 import numpy as np
-from gym.spaces import Box, Discrete
 from pathlib import Path
 from torch.autograd import Variable
 from tensorboardX import SummaryWriter
@@ -11,16 +9,12 @@ from utils.buffer import ReplayBuffer
 from utils.env_wrappers import SubprocVecEnv, DummyVecEnv
 from algorithms.attention_sac import AttentionSAC
 
-from UnityGymWrapper import GymEnv
-
-import mlagents
-from mlagents_envs.environment import UnityEnvironment
-
+from UnityGymWrapper5 import GymEnv
 
 def make_parallel_env(env_id, n_rollout_threads, seed):
     def get_env_fn(rank):
         def init_env():
-            env = GymEnv(name="../Build/Logistics")
+            env = GymEnv(name="../Build_Windows/Logistics")
             np.random.seed(seed + rank * 1000)
             return env
         return init_env
@@ -104,7 +98,7 @@ def run(config):
                     model.update_all_targets()
                 model.prep_rollouts(device='cpu')
 
-        print("episode : %8d/%8d | rewards : %.4f %.4f %.4f %.4f %.4f " % (ep_i, config["n_episodes"], *episode_rewards), end='\n\n')
+        print("episode : %8d/%8d | rewards : %.4f %.4f %.4f %.4f %.4f " % (ep_i + 1, config["n_episodes"], *episode_rewards), end='\n')
 
         ep_rews = replay_buffer.get_average_rewards(
             config["episode_length"] * config["n_rollout_threads"])
@@ -145,6 +139,6 @@ if __name__ == '__main__':
     config["tau"] = 0.001
     config["gamma"] = 0.99
     config["reward_scale"] = 100.0
-    config["use_gpu"] = True
+    config["use_gpu"] = False
 
     run(config)
