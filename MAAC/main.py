@@ -14,7 +14,7 @@ from UnityGymWrapper5 import GymEnv
 def make_parallel_env(env_id, n_rollout_threads, seed):
     def get_env_fn(rank):
         def init_env():
-            env = GymEnv(name="../Build_Windows/Logistics")
+            env = GymEnv(name="../Build_Linux/Logistics")
             np.random.seed(seed + rank * 1000)
             return env
         return init_env

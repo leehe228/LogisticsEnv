@@ -1,9 +1,6 @@
-import argparse
 import torch
-import time
 import os
 import numpy as np
-from gym.spaces import Box, Discrete
 from pathlib import Path
 from torch.autograd import Variable
 from tensorboardX import SummaryWriter
@@ -12,15 +9,14 @@ from utils.buffer import ReplayBuffer
 from utils.env_wrappers import SubprocVecEnv, DummyVecEnv
 from algorithms.maddpg import MADDPG
 
-from UnityGymWrapper4 import GymEnv
-from mlagents_envs.environment import UnityEnvironment
+from UnityGymWrapper5 import GymEnv
 
 USE_CUDA = False  # torch.cuda.is_available()
 
 def make_parallel_env(env_id, n_rollout_threads, seed):
     def get_env_fn(rank):
         def init_env():
-            env = GymEnv(name="../Build/Logistics")
+            env = GymEnv(name="../Build_Linux/Logistics")
             np.random.seed(seed + rank * 1000)
             return env
         return init_env
@@ -112,7 +108,7 @@ def run(config):
                     maddpg.update_all_targets()
                 maddpg.prep_rollouts(device='cpu')
 
-        print("episode : %8d/%8d | rewards : %.4f %.4f %.4f %.4f %.4f " % (ep_i, config["n_episodes"], *episode_rewards), end='\n\n')
+        print("episode : %8d/%8d | rewards : %.4f %.4f %.4f %.4f %.4f " % (ep_i + 1, config["n_episodes"], *episode_rewards), end='\n')
 
         ep_rews = replay_buffer.get_average_rewards(
             config["episode_length"] * config["n_rollout_threads"])
