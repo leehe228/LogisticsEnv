@@ -1,28 +1,93 @@
-# Environment
+## Logistics Environment
+This UAV Logistics Environment with a continuous observation and discrete action space, along with physical based UAVs and parcels which powered by Unity Engine. Used in Paper [Multi agent reinforcement learning based UAV control for Urban Aerial Mobility logistics](https://apisat2021.org/) in [APISAT2021](https://apisat2021.org/) Conference.
+
+### Requirements
+
+- Python 3.6 (minimum)
+- [OpenAI baselines](https://github.com/openai/baselines), version 0.1.6
+- [PyTorch](https://pytorch.org/) (compatible to your CUDA version)
+- [Tensorboard](https://github.com/tensorflow/tensorboard) (compatible to PyTorch version)
+- [OpenAI Gym](https://github.com/openai/gym), version 0.15.7
+- [Unity mlagents](https://github.com/Unity-Technologies/ml-agents), version 0.27.0 (Release 18)
+<br>
+
+**Unity Editor**
+
+- Unity Editor, version 2020.3.x (LTS) (minimum)
+- Unity ML-Agents Package Release 2.1.0 exp1 (Not compatible with other versions)
+
+<br>
+
+### Getting Started
+- install requirements packages (in a virtual-env)
+- `git clone https://github.com/dmslab-konkuk/LogisticsEnv.git`
+- `cd MAAC` or `cd MADDPG`
+- edit parameters in main.py (learning parameters)
+- Followed by your OS, select built environment file between `Build_Windows` or `Build_Linux` (give right path)
+- `python main.py` to run training
+
+**Tensorboard**
+
+- `MAAC/models/Logistics/MAAC/` or `MADDPG/models/Logistics/MADDPG`
+- `tensorboard --logdir=runX`
+- open `localhost:6006`
+
+**Parcel Counter**
+
+- `MAAC/CSV/countXXXX.csv` : number of successfully shipped parcel is written in this csv file. (XXXX must be yyyyMMddHHmmss of training start time)
+- first row is number of small box, second is number of big box, third is sum of both.
+
+<br>
+
+### Scenario
+![](https://images.velog.io/images/leehe228/post/8d01796d-133d-41ba-8ec6-bf43f9937032/image.png)
+
+<br>
+
+### Used Algorithm
+- [Multi-Actor-Attention-Ctritic](https://github.com/shariqiqbal2810/MAAC) (MAAC) 
+from [Actor-Attention-Critic for Multi-Agent Reinforcement Learning](https://arxiv.org/abs/1810.02912)  (Iqbal and Sha, ICML 2019)
+- [Multi-Agent DDPG](https://github.com/shariqiqbal2810/maddpg-pytorch) (MADDPG)
+
+<br>
 
 ### Python API
+**Gym Functions**
 
 This Logistics Environment follows [OpenAI Gym](https://github.com/openai/gym) API design :
 
-- `from UnityGymWrapper import GymEnv` - import
-- `env = GymEnv(name="path to Unity Environment")` - Returns wrapped environment object.
+- `from UnityGymWrapper5 import GymEnv` - import class (newest version is Wrapper5)
+- `env = GymEnv(name="path to Unity Environment", ...)` - Returns wrapped environment object.
 - `obs = reset()` - Resets environment to the initial state. Returns initial observation.
-- `obs, reward, done, info = step(action)` - A single step. Require actions, returns observation, reward, done, information list.
+- `obs, reward, done, info = step(actions)` - A single step. Require actions, returns observation, reward, done, information list.
+<br>
 
-### Unity GymWrapper
+**Unity Gym Wrapper**
+This Wrapper can wrap Unity ML-Agents Environment (API version 2.1.0 exp1, mlagents version 0.27.0) which has multiple Discrete-Action-Agent.
 
-/
+GymWrapper provided by Unity supports only single agent environment.
+[UnityGymWrapper5.py](https://github.com/dmslab-konkuk/LogisticsEnv/blob/main/MAAC/UnityGymWrapper5.py) is in Github Repository.
+<br>
 
-### Environment Configuration
+**Configurations**
+`env = GymEnv(name='', width=0, height=0, ...)`
 
-/
+- `width` : Defines the width of the display. (Must be set alongside height)
+- `height` : Defines the height of the display. (Must be set alongside width)
+- `timescale` : Defines the multiplier for the deltatime in the simulation. If set to a higher value, time will pass faster in the simulation but the physics may perform unpredictably.
+- `quality_level` : Defines the quality level of the simulation.
+- `target_frame_rate` : Instructs simulation to try to render at a specified frame rate.
+- `capture_frame_rate` : Instructs the simulation to consider time between updates to always be constant, regardless of the actual frame rate.
+- `name` : path to Unity Built Environment (ex : `../Build_Linux/Logistics`)
+- `mapsize` : size of map in virtual environment (x by x)
+- `numbuilding` : number of buildings (obstacle)
 
-# Observations
+<br>
 
+### Observation
 Observation size for each agent
-
-```bash
-31 + 7 x (nagents - 1) + (27 : raycast observation)
+```
+29 + 7 x (nagent - 1) + (27 : ray-cast obs)
 ```
 
 **This UAV Information**
@@ -35,19 +100,20 @@ Observation size for each agent
 - 2 : each magnitude from this to the big box hub and small box hub
 - 6 : (x, y, z, x, y, z) nearest big and small box coordinates (if there's no box nearby, zero)
 - 2 : each magnitude from this to the nearest big box and the nearest small box (if there's no box nearby, zero)
-- 4 : (x, y, z, m) if UAV holds any box, the coordinates and magnitudes are given. if not, zero
+- 4 : (x, y, z, d) if UAV holds any box, the coordinates and magnitudes are given. if not, zero
 
-**Raycast Observation (from [Unity MLAgents](https://github.com/Unity-Technologies/ml-agents/blob/release_18_docs/docs/Learning-Environment-Design-Agents.md#raycast-observations))**
+**Raycast Observation** (from [Unity ML-Agents](https://github.com/Unity-Technologies/ml-agents/blob/release_18_docs/docs/Learning-Environment-Design-Agents.md#raycast-observations))
 
 - 1 - magnitude value (0 if nothing is detected)
 - 2 - one hot encoding of detected object (nothing, building)
 - (1 + 2) x 9 - rays per direction
 
-# Actions
+<br>
 
+### Actions
 UAV can move to 6 directions (up, down, forward, backward, left, right) or not move
 
-The action is discrete action, and size of action set is 7.
+The action is **discrete action**, and size of action set is 7.
 
 - index 0 : not move
 - index 1 : forward
@@ -57,10 +123,9 @@ The action is discrete action, and size of action set is 7.
 - index 5 : up
 - index 6 : down
 
-# Reward
+<br>
 
-/
-
+### Reward
 **Driving Reward**
 
 ```python
@@ -68,8 +133,6 @@ The action is discrete action, and size of action set is 7.
 ```
 
 To make UAV learn driving forward destination, ***distance penalty*** is given per every step. If UAV holds any parcel, the distance is calculated with a destination where the parcel have to shipped. If UAV have to pick some parcel, distance between UAV and a big box or a small box, whichever is closer to UAV is calculated.
-
-UAV를 목적지를 향해 움직이도록 하기 위하여, 거리 페널티가 매 스텝마다 주어진다. 만약 UAV가 짐을 들고 있다면, 그 짐이 배달되어야 하는 목적지와의 거리를 이용해 계산된다. 만약 UAV가 짐을 들어야 한다면, UAV와 큰 박스와 작은 박스 중 가까운 것과의 거리가 계산된다.
 
 **Shipping Reward**
 
@@ -82,9 +145,22 @@ UAV를 목적지를 향해 움직이도록 하기 위하여, 거리 페널티가
 - -8.0 : when the first UAV dropped a big box
 - -15.0 : when tow UAVs dropped a big box
 
+These values are designed to make UAV work efficiently.
+
 **Collision Penalty**
 
 - -10.0 : when UAV collide with another UAV or a building
 
-# Scenario
-![Environment Image](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/160c52b6-b1fd-4ed2-a78f-d1d2adb85bb1/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210803%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210803T115842Z&X-Amz-Expires=86400&X-Amz-Signature=414e0e9e85800214d445f5317d5b12156839fd6622a241536008646db627500f&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
+UAV has to avoid buildings and another UAV with raycast observation.
+
+<br>
+
+### Training Result
+We trained model with random-decision model, reinforcement model (SAC, DQN, MADDPG) and MAAC (Multi-Attention-Actor-Critic for Multi-Agent) model. We trained **30k episode** each model.
+
+<br>
+
+### Credit
+developed by [Hoeun Lee](https://github.com/leehe228) (in [DMS Lab](https://github.com/dmslab-konkuk) in [Dept. of Computer Science and Engineering](http://cse.konkuk.ac.kr/), [Konkuk University](http://www.konkuk.ac.kr/do/Index.do), Seoul, Korea)
+
+Copyright Hoeun Lee, 2021, All Right Reserved. 

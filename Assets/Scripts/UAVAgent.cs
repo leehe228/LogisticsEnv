@@ -96,7 +96,7 @@ namespace PA_DronePack
         {
             // AddVectorObs(float state);
 
-            // total 22 + ( 3 x (num_of_uavs - 1) ) + raycast
+            // total 29 + ( 7 x (num_of_uavs - 1) ) + raycast ()
 
             // this uav physics ( x 6 )
             sensor.AddObservation(gameObject.transform.position);
@@ -138,7 +138,7 @@ namespace PA_DronePack
                 sensor.AddObservation(0f);
             }
             
-            // other uavs position, distance ( 7 x (num_of_uavs - 1) )
+            // other uavs position, distance, boxtype ( 7 x (num_of_uavs - 1) )
             GameObject[] uavs = GameObject.FindGameObjectsWithTag("uav");
             foreach (GameObject uav in uavs) {
                 if (uav.gameObject.name != gameObject.name) {
