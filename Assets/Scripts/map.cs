@@ -78,13 +78,9 @@ public class map : MonoBehaviour
 
         if (!File.Exists(filepath)) {
             File.Create(filepath);
-
-            File.AppendAllText(filepath, "episode,smallbox,bigbox,sum\n");
         }
         if (!File.Exists(timepath)) {
             File.Create(timepath);
-
-            File.AppendAllText(timepath, "episode,time\n");
         }
 
         InitWorld(mapSize, numBuilding, maxSmallBoxNum, maxBigBoxNum);
