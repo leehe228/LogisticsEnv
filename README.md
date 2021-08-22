@@ -81,6 +81,8 @@ GymWrapper provided by Unity supports only single agent environment.
 - `name` : path to Unity Built Environment (ex : `../Build_Linux/Logistics`)
 - `mapsize` : size of map in virtual environment (x by x)
 - `numbuilding` : number of buildings (obstacle)
+- `max_smallbox` : max number of small box will be generated
+- `max_bigbox` : max number of big box will be generated
 
 <br>
 
