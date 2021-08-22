@@ -21,6 +21,8 @@ class GymEnv(object):
                  name : str, 
                  mapsize : Optional[int] = 13, 
                  numbuilding : Optional[int] = 3, 
+                 max_smallbox : Optional[int] = 10,
+                 max_bigbox : Optional[int] = 10,
                  width : Optional[int] = 480, 
                  height : Optional[int] = 270, 
                  timescale : Optional[float] = 20,
@@ -32,6 +34,8 @@ class GymEnv(object):
         name : path to Unity Environment
         mapsize : map size (x by x)
         numbuilding : number of buildings
+        max_smallbox : max number of small parcels to check time
+        max_bigbox : max number of big parcels to check time
 
         <Unity Environment Engine Parameters>
         width : Defines the width of the display. (Must be set alongside height)
@@ -60,8 +64,11 @@ class GymEnv(object):
             quality_level=quality_level,
             target_frame_rate=target_frame_rate,
             capture_frame_rate=capture_frame_rate)
+
         env_channel.set_float_parameter("mapsize", mapsize)
         env_channel.set_float_parameter("building_num", numbuilding)
+        env_channel.set_float_parameter("slimit", max_smallbox)
+        env_channel.set_float_parameter("blimit", max_bigbox)
         
         self.env.reset()
 

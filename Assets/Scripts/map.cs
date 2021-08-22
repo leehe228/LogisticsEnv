@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using System.IO;
+using System.Diagnostics;
 
 using PA_DronePack;
 public class map : MonoBehaviour
@@ -50,15 +51,18 @@ public class map : MonoBehaviour
     public float seconds;
 
     public string starttime = System.DateTime.Now.ToString("yyyyMMddHHmmss");
-    public string filepath;
+    public string filepath, timepath;
+    public bool writelock;
+
+    Stopwatch stopwatch = new Stopwatch();
 
     public void Awake() {
         // set parameters
         smallSpawnCount = 0;
         bigSpawnCount = 0;
 
-        maxSmallBoxNum = 100;
-        maxBigBoxNum = 100;
+        maxSmallBoxNum = 10;
+        maxBigBoxNum = 10;
 
         mapSize = 13;
         numBuilding = 3;
@@ -68,16 +72,22 @@ public class map : MonoBehaviour
         }
 
         filepath = "./CSV/count" + starttime + ".csv";
+        timepath = "./CSV/time" + starttime + ".csv";
 
         if (!File.Exists(filepath)) {
             File.Create(filepath);
         }
+        if (!File.Exists(timepath)) {
+            File.Create(timepath);
+        }
 
-        InitWorld(mapSize, numBuilding);
+        InitWorld(mapSize, numBuilding, maxSmallBoxNum, maxBigBoxNum);
     }
 
-    public void InitWorld(int ms, int nb) {
+    public void InitWorld(int ms, int nb, int slimit, int blimit) {
         
+        stopwatch.Reset();
+
         mapSize = ms;
         numBuilding = nb;
 
@@ -89,7 +99,11 @@ public class map : MonoBehaviour
         smallBoxSuccCount = 0;
         bigBoxSuccCount = 0;
 
+        maxSmallBoxNum = slimit;
+        maxBigBoxNum = blimit;
+
         seconds = 0f;
+        writelock = false;
 
         // delete all
         GameObject[] hubs = GameObject.FindGameObjectsWithTag("hub");
@@ -168,28 +182,31 @@ public class map : MonoBehaviour
 
         SpawnSmallBox();
         SpawnBigBox();
+
+        stopwatch.Start();
     }
     
     void Update()
     {   
-        // Set InfoText
-        /*GameObject[] uavs = GameObject.FindGameObjectsWithTag("uav");
-        
-        // stopwatch
-        seconds += Time.deltaTime;
-        string text = "<Time>\n" + Mathf.Round(seconds).ToString() + "s\n\n<UAVs Information>\n";
-        
-        foreach (GameObject uav in uavs) {
-            text += uav.name + "\nBox Type : " + uav.GetComponent<UAVAgent>().boxType + " / Energy : " + (Mathf.Round(uav.GetComponent<UAVAgent>().energy ) ).ToString() + "%\n\n";
-        }*/
+        infoText.text = "small : " + smallBoxSuccCount.ToString() + "/" + maxSmallBoxNum + "\nbig : " + bigBoxSuccCount.ToString() + "/" + maxBigBoxNum + "\n\ntime : " + stopwatch.ElapsedMilliseconds.ToString();
 
-        infoText.text = "<Number of successes>\nsmall box : " + smallBoxSuccCount.ToString() + "\nbig box : " + bigBoxSuccCount.ToString() + "\n";
+        if (!writelock && smallBoxSuccCount == maxSmallBoxNum && bigBoxSuccCount == maxBigBoxNum) {
+            writelock = true;
+            WriteTime();
+        }
     }
 
     public void WriteCSV() {
-        string countstr = smallBoxSuccCount.ToString() + "," + bigBoxSuccCount.ToString() + "," + (smallBoxSuccCount.ToString() + bigBoxSuccCount.ToString()).ToString() + "\n";
+        string countstr = smallBoxSuccCount.ToString() + "," + bigBoxSuccCount.ToString() + "," + (smallBoxSuccCount + bigBoxSuccCount).ToString() + "\n";
         
         File.AppendAllText(filepath, countstr);
+    }
+
+    public void WriteTime() {
+        stopwatch.Stop();
+        string timestr = stopwatch.ElapsedMilliseconds.ToString() + "\n";
+
+        File.AppendAllText(timepath, timestr);
     }
 
     public void SpawnSmallBox() {

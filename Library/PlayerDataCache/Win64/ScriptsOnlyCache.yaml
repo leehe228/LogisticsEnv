@@ -67,39 +67,39 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1648}
+      Script: {instanceID: 1650}
     - Class: 114
-      Script: {instanceID: 2040}
+      Script: {instanceID: 2042}
     - Class: 114
-      Script: {instanceID: 2152}
+      Script: {instanceID: 2154}
     - Class: 114
-      Script: {instanceID: 2208}
+      Script: {instanceID: 2210}
     - Class: 114
-      Script: {instanceID: 2238}
+      Script: {instanceID: 2240}
     - Class: 114
-      Script: {instanceID: 2616}
+      Script: {instanceID: 2618}
     - Class: 114
-      Script: {instanceID: 2718}
+      Script: {instanceID: 2720}
     - Class: 114
-      Script: {instanceID: 2768}
+      Script: {instanceID: 2770}
     - Class: 114
-      Script: {instanceID: 2836}
+      Script: {instanceID: 2838}
     - Class: 114
-      Script: {instanceID: 2984}
+      Script: {instanceID: 2986}
     - Class: 114
-      Script: {instanceID: 3248}
+      Script: {instanceID: 3250}
     - Class: 114
-      Script: {instanceID: 3306}
+      Script: {instanceID: 3308}
     - Class: 114
-      Script: {instanceID: 3324}
+      Script: {instanceID: 3326}
     - Class: 114
-      Script: {instanceID: 3672}
+      Script: {instanceID: 3674}
     - Class: 114
-      Script: {instanceID: 3940}
+      Script: {instanceID: 3942}
     - Class: 114
-      Script: {instanceID: 4876}
+      Script: {instanceID: 4878}
     - Class: 114
-      Script: {instanceID: 5084}
+      Script: {instanceID: 5086}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -791,7 +791,7 @@ ScriptsOnlyBuild:
     className: Match3ActuatorComponent
   - hash:
       serializedVersion: 2
-      Hash: 3c045382ea86c0251ebb695c7435d314
+      Hash: b12bb4a216af6df9e657d7eaf2b8f037
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: map
