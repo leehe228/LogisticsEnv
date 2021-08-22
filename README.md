@@ -37,6 +37,10 @@ This UAV Logistics Environment with a continuous observation and discrete action
 - `MAAC/CSV/countXXXX.csv` : number of successfully shipped parcel is written in this csv file. (XXXX must be yyyyMMddHHmmss of training start time)
 - first row is number of small box, second is number of big box, third is sum of both.
 
+**Timer**
+
+- `MAAC/CSV/timerXXXX.csv` : spent time to finish shipping given boxes. (finishing condigion follows `max_smallbox` and `max_bigbox` parameters) 
+
 <br>
 
 ### Scenario
