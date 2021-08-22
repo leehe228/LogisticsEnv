@@ -95,16 +95,16 @@ Observation size for each agent
 - 3 : (x, y, z) coordinates of this UAV
 - 3 : (x, y, z) velocity of this UAV
 - 3 : one hot encoding of box type (not holding, small box, big box)
-- 7 x (n - 1) : other UAVs information (3 - coordinates, 1 - magnitude, 3 - box type)
+- 7 x (n - 1) : other UAVs information (3 - coordinates, 1 - distance, 3 - box type one-hot encoding)
 - 6 : (x, y, z, x, y, z) big box hub and small box hub coordinates
-- 2 : each magnitude from this to the big box hub and small box hub
+- 2 : each distance from this to the big box hub and small box hub
 - 6 : (x, y, z, x, y, z) nearest big and small box coordinates (if there's no box nearby, zero)
-- 2 : each magnitude from this to the nearest big box and the nearest small box (if there's no box nearby, zero)
-- 4 : (x, y, z, d) if UAV holds any box, the coordinates and magnitudes are given. if not, zero
+- 2 : each distance from this to the nearest big box and the nearest small box (if there's no box nearby, zero)
+- 4 : (x, y, z, d) if UAV holds any box, the coordinates and distances are given. if not, zero
 
 **Raycast Observation** (from [Unity ML-Agents](https://github.com/Unity-Technologies/ml-agents/blob/release_18_docs/docs/Learning-Environment-Design-Agents.md#raycast-observations))
 
-- 1 - magnitude value (0 if nothing is detected)
+- 1 - distance (0 if nothing is detected)
 - 2 - one hot encoding of detected object (nothing, building)
 - (1 + 2) x 9 - rays per direction
 
