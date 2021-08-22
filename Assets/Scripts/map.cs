@@ -54,6 +54,8 @@ public class map : MonoBehaviour
     public string filepath, timepath;
     public bool writelock;
 
+    public int episode = -1;
+
     Stopwatch stopwatch = new Stopwatch();
 
     public void Awake() {
@@ -76,9 +78,13 @@ public class map : MonoBehaviour
 
         if (!File.Exists(filepath)) {
             File.Create(filepath);
+
+            File.AppendAllText(filepath, "episode,smallbox,bigbox,sum\n");
         }
         if (!File.Exists(timepath)) {
             File.Create(timepath);
+
+            File.AppendAllText(timepath, "episode,time\n");
         }
 
         InitWorld(mapSize, numBuilding, maxSmallBoxNum, maxBigBoxNum);
@@ -87,6 +93,8 @@ public class map : MonoBehaviour
     public void InitWorld(int ms, int nb, int slimit, int blimit) {
         
         stopwatch.Reset();
+
+        episode++;
 
         mapSize = ms;
         numBuilding = nb;
@@ -189,7 +197,9 @@ public class map : MonoBehaviour
     void Update()
     {   
         infoText.text = "small : " + smallBoxSuccCount.ToString() + "/" + maxSmallBoxNum + "\nbig : " + bigBoxSuccCount.ToString() + "/" + maxBigBoxNum + "\n\ntime : " + stopwatch.ElapsedMilliseconds.ToString();
+    }
 
+    public void NumberCheck() {
         if (!writelock && smallBoxSuccCount == maxSmallBoxNum && bigBoxSuccCount == maxBigBoxNum) {
             writelock = true;
             WriteTime();
@@ -197,14 +207,14 @@ public class map : MonoBehaviour
     }
 
     public void WriteCSV() {
-        string countstr = smallBoxSuccCount.ToString() + "," + bigBoxSuccCount.ToString() + "," + (smallBoxSuccCount + bigBoxSuccCount).ToString() + "\n";
+        string countstr = episode.ToString() + "," + smallBoxSuccCount.ToString() + "," + bigBoxSuccCount.ToString() + "," + (smallBoxSuccCount + bigBoxSuccCount).ToString() + "\n";
         
         File.AppendAllText(filepath, countstr);
     }
 
     public void WriteTime() {
         stopwatch.Stop();
-        string timestr = stopwatch.ElapsedMilliseconds.ToString() + "\n";
+        string timestr = episode.ToString() + "," + stopwatch.ElapsedMilliseconds.ToString() + "\n";
 
         File.AppendAllText(timepath, timestr);
     }

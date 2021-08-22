@@ -22,8 +22,6 @@ namespace PA_DronePack
         public Vector3 boxPos;
         public LineRenderer line;
 
-        public int step;
-
         // public float energy;
         // public bool isCharging;
 
@@ -85,11 +83,6 @@ namespace PA_DronePack
             line.startWidth = 0.05f; line.endWidth = 0.05f;
             line.SetPosition(0, new Vector3(0f, -10f, 0f));
             line.SetPosition(1, new Vector3(0f, -10f, 0f));
-
-            // energy = 100f;
-            // isCharging = false;
-
-            step = 0;
         }
 
         public override void CollectObservations(VectorSensor sensor)
@@ -357,6 +350,8 @@ namespace PA_DronePack
                 step = 0;
                 EndEpisode();
             }*/
+
+            MAP.GetComponent<map>().NumberCheck();
         }
 
         // Player Heuristic Controll
