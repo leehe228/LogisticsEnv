@@ -40,6 +40,8 @@ This UAV Logistics Environment with a continuous observation and discrete action
 **Timer**
 
 - `MAAC/CSV/timerXXXX.csv` : spent time to finish shipping given boxes. (finishing condigion follows `max_smallbox` and `max_bigbox` parameters) 
+- if UAVs failed to ship all of given parcels, a time-written line will be not appended. 
+- the line is milli-second. (1Kms is a second)
 
 <br>
 
