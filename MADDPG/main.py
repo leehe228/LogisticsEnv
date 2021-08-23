@@ -16,7 +16,19 @@ USE_CUDA = False  # torch.cuda.is_available()
 def make_parallel_env(env_id, n_rollout_threads, seed):
     def get_env_fn(rank):
         def init_env():
-            env = GymEnv(name="../Build_Linux/Logistics")
+            # edit parameters
+            env = GymEnv(name="../Build_Linux/Logistics", 
+                         mapsize=13, 
+                         numbuilding=3, 
+                         max_smallbox=10, 
+                         max_bigbox=10, 
+                         width=480, 
+                         height=270, 
+                         timescale=20, 
+                         quality_level=5, 
+                         target_frame_rate=30, 
+                         capture_frame_rate=30)
+
             np.random.seed(seed + rank * 1000)
             return env
         return init_env
@@ -113,7 +125,8 @@ def run(config):
         ep_rews = replay_buffer.get_average_rewards(
             config["episode_length"] * config["n_rollout_threads"])
         for a_i, a_ep_rew in enumerate(ep_rews):
-            logger.add_scalar('agent%i/mean_episode_rewards' % a_i, a_ep_rew, ep_i)
+            logger.add_scalar('agent%i/mean_episode_rewards' % a_i, 
+                              a_ep_rew * config["episode_length"], ep_i)
 
         if ep_i % config["save_interval"] < config["n_rollout_threads"]:
             os.makedirs(run_dir / 'incremental', exist_ok=True)
@@ -130,7 +143,7 @@ if __name__ == '__main__':
     config = dict()
 
     config["env_id"] = "Logistics"
-    config["model_name"] = "MADDPG"
+    config["model_name"] = "MADDPG" # MADDPG or DDPG
     config["seed"] = 1
     config["n_rollout_threads"] = 1
     config["n_training_threads"] = 1

@@ -14,7 +14,19 @@ from UnityGymWrapper5 import GymEnv
 def make_parallel_env(env_id, n_rollout_threads, seed):
     def get_env_fn(rank):
         def init_env():
-            env = GymEnv(name="../Build_Linux/Logistics")
+            # edit parameters
+            env = GymEnv(name="../Build_Linux/Logistics", 
+                         mapsize=13, 
+                         numbuilding=3, 
+                         max_smallbox=10, 
+                         max_bigbox=10, 
+                         width=480, 
+                         height=270, 
+                         timescale=20, 
+                         quality_level=5, 
+                         target_frame_rate=30, 
+                         capture_frame_rate=30)
+
             np.random.seed(seed + rank * 1000)
             return env
         return init_env
@@ -54,7 +66,6 @@ def run(config):
                                  [acsp for acsp in env.action_space])
     t = 0
     for ep_i in range(0, config["n_episodes"], config["n_rollout_threads"]):
-        # print("Episodes %i-%i of %i" % (ep_i + 1, ep_i + 1 + config["n_rollout_threads"], config["n_episodes"]))
         
         obs = env.reset()
         model.prep_rollouts(device='cpu')
@@ -126,9 +137,9 @@ if __name__ == '__main__':
     config["n_rollout_threads"] = 1
     config["buffer_length"] = int(1e6)
     config["n_episodes"] = 30000
-    config["episode_length"] = 1000 # 25
-    config["steps_per_update"] = 250 # 100
-    config["num_updates"] = 2 # 4
+    config["episode_length"] = 1000
+    config["steps_per_update"] = 250
+    config["num_updates"] = 2
     config["batch_size"] = 1024
     config["save_interval"] = 5000
     config["pol_hidden_dim"] = 128

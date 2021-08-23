@@ -171,7 +171,6 @@ class GymEnv(object):
         make a single step of environment.
         requires actions of all agents, returns obs, rewards, dones, infos like Gym.
         """
-        
         lastidx = 0
         for _i in range(self.nbehavior):
             action_tuple = ActionTuple()
