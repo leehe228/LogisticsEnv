@@ -15,31 +15,23 @@ namespace PA_DronePack
         // pre-distance current-distance
         float preDist, curDist;
 
-        // drone in-game parameter
+        // is UAV holds a box
         public bool isHold;
+
+        // holding box type (0 : none, 1 : small, 2 : big)
         public int boxType;
+
+        // position of destination
         public Vector3 destinationPos;
+
+        // position of box
         public Vector3 boxPos;
+
+        // line renderer to render line between box and UAV
         public LineRenderer line;
 
-        // public float energy;
-        // public bool isCharging;
-
-        // public float energyRate = 0.12f;
-
+        // MAP gameobject
         GameObject MAP;
-
-        public List<string[]> rowData = new List<string[]>();
-
-        void Start()
-        {
-            //
-        }
-
-        void Update()
-        {
-            //
-        }
 
         public override void Initialize()
         {
@@ -60,11 +52,6 @@ namespace PA_DronePack
             line.startWidth = 0.05f; line.endWidth = 0.05f;
             line.SetPosition(0, new Vector3(0f, -10f, 0f));
             line.SetPosition(1, new Vector3(0f, -10f, 0f));
-
-            //MAP.GetComponent<map>().InitWorld();
-
-            // energy = 100f;
-            // isCharging = false;
         }
 
         public override void OnEpisodeBegin()
@@ -87,34 +74,13 @@ namespace PA_DronePack
 
         public override void CollectObservations(VectorSensor sensor)
         {
-            // AddVectorObs(float state);
-
             // total 29 + ( 7 x (num_of_uavs - 1) ) + raycast ()
 
             // this uav physics ( x 6 )
             sensor.AddObservation(gameObject.transform.position);
             sensor.AddObservation(gameObject.GetComponent<Rigidbody>().velocity);
-            // sensor.AddObservation(gameObject.GetComponent<Rigidbody>().angularVelocity);
 
-            // energy ( x 11 )
-            /*sensor.AddObservation(energy / 100f);
-            int idx = (int)((Mathf.Round(energy) + 9) / 10);
-            for (int i = 0; i < 11; i++) {
-                if (i == idx) sensor.AddObservation(1f);
-                else sensor.AddObservation(0f);
-            }*/
-
-            // is this charging ( x 2 )
-            /*if (isCharging) {
-                sensor.AddObservation(0f);
-                sensor.AddObservation(1f);
-            }
-            else {
-                sensor.AddObservation(1f);
-                sensor.AddObservation(0f);
-            }*/
-
-            // box Type ( x 3 )
+            // box Type one-hot encoding ( x 3 )
             if (boxType == 2) {
                 sensor.AddObservation(0f);
                 sensor.AddObservation(0f);
@@ -155,9 +121,6 @@ namespace PA_DronePack
                         sensor.AddObservation(0f);
                         sensor.AddObservation(0f);
                     }
-
-                    // other uav energy
-                    // sensor.AddObservation(100f - (uav.GetComponent<UAVAgent>().energy / 100f));
                 }
             }
 
@@ -210,35 +173,10 @@ namespace PA_DronePack
                 sensor.AddObservation(Vector3.zero);
                 sensor.AddObservation(0f);
             }
-
-            // charging station position ( x 3 )
-            // sensor.AddObservation(MAP.GetComponent<map>().chargingStation.transform.position);
-
-            // charging station distance
-            // sensor.AddObservation((gameObject.transform.position - MAP.GetComponent<map>().chargingStation.transform.position).magnitude);
         }
 
         public override void OnActionReceived(ActionBuffers actionBuffers)
         {   
-            /*if (!isCharging) {
-                if (energy > 0f) {
-                    if (boxType == 0) {
-                        energy -= energyRate;
-                    }
-                    else if (boxType == 1) {
-                        energy -= (energyRate * 1.5f);
-                    }
-                    else if (boxType == 2) {
-                        energy -= (energyRate * 2f);
-                    }
-                }
-                // energy is 0%
-                else {
-                    AddReward(-30f);
-                    EndEpisode();
-                }    
-            }*/
-
             // Discrete Action
             float drive = 0f;
             float strafe = 0f;
@@ -274,21 +212,10 @@ namespace PA_DronePack
                 lift = -1f;
             }
 
-            /*if (energy == 0f) {
-                dcoScript.DriveInput(0f);
-                dcoScript.StrafeInput(0f);
-                dcoScript.LiftInput(-1f);
-            }
-            else {*/
+            // make UAV drive
             dcoScript.DriveInput(drive);
             dcoScript.StrafeInput(strafe);
             dcoScript.LiftInput(lift);
-            // }
-
-            // Rotation Test
-            // Quaternion target = Quaternion.Euler(60f, 60f, 60f);
-            // transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * 0.5f);
-
 
             // Give Reward following Magnitude between destination and this, when this holds parcel.
             if (isHold) {
@@ -309,9 +236,6 @@ namespace PA_DronePack
                 }
                 preDist = curDist;
             }
-
-            // Penalty per each frame
-            // AddReward(-0.0001f);
             
             // if UAV is holding
             if (isHold) {
@@ -332,25 +256,7 @@ namespace PA_DronePack
                 isHold = false;
             }
 
-            /*if (isHold) {
-                if ((gameObject.transform.position - boxPos).magnitude > 5f) {
-                    isHold = false;
-                    boxPos = Vector3.zero;
-                }
-            }*/
-
-            // energy
-            // float energyReward = (energy - 50f) / 5000f;
-            // AddReward(energyReward);
-
-            // step++;
-            // Debug.Log(step);
-
-            /*if (step == 1000) {
-                step = 0;
-                EndEpisode();
-            }*/
-
+            // check shipped box number
             MAP.GetComponent<map>().NumberCheck();
         }
 
@@ -405,32 +311,14 @@ namespace PA_DronePack
             {
                 AddReward(-10.0f);
             }
-
-            /*if (other.gameObject.CompareTag("station")) {
-                AddReward(1f);
-                isCharging = true;
-            }*/
         }
 
         void OnCollisionStay(Collision other) {
-            // charge energy
-
-            /*if (other.gameObject.CompareTag("station")) {
-                if (energy < 100f) {
-                    energy += 1f;
-                    AddReward(0.01f);
-                }
-                else {
-                    energy = 100f;
-                    AddReward(-0.0003f);
-                }
-            }*/
+            //
         }
 
         void OnCollisionExit(Collision other) {
-            /*if (other.gameObject.CompareTag("station")) {
-                isCharging = false;
-            }*/
+            //
         }
 
         // Give Reward to this UAV at outside
@@ -443,5 +331,4 @@ namespace PA_DronePack
             EndEpisode();
         }
     }
-
 }

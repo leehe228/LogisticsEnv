@@ -28,8 +28,6 @@ public class map : MonoBehaviour
     public GameObject bigDestinationPrefab;
     public GameObject smallHubPrefab;
     public GameObject bigHubPrefab;
-    public GameObject gridPrefab;
-    // public GameObject ChargingStationPrefab;
 
     // Hub Instance
     public GameObject smallHub;
@@ -39,9 +37,6 @@ public class map : MonoBehaviour
     // map parameter
     int mapSize;
     int numBuilding;
-
-    public int maxEpisodeLen;
-    private int nowEpisodeStep;
 
     // map table array
     public int[,] world;
@@ -58,24 +53,21 @@ public class map : MonoBehaviour
 
     Stopwatch stopwatch = new Stopwatch();
 
-    public void Awake() {
-        // set parameters
-        smallSpawnCount = 0;
-        bigSpawnCount = 0;
+    public void InitWorld(int ms, int nb, int slimit, int blimit) {
+        
+        // start stopwatch
+        stopwatch.Reset();
 
-        maxSmallBoxNum = 10;
-        maxBigBoxNum = 10;
-
-        mapSize = 13;
-        numBuilding = 3;
-
+        // directory check
         if (!Directory.Exists("./CSV/")) {
             Directory.CreateDirectory("./CSV/");
         }
 
+        // csv file path
         filepath = "./CSV/count" + starttime + ".csv";
         timepath = "./CSV/time" + starttime + ".csv";
 
+        // file check
         if (!File.Exists(filepath)) {
             File.Create(filepath);
         }
@@ -83,13 +75,7 @@ public class map : MonoBehaviour
             File.Create(timepath);
         }
 
-        InitWorld(mapSize, numBuilding, maxSmallBoxNum, maxBigBoxNum);
-    }
-
-    public void InitWorld(int ms, int nb, int slimit, int blimit) {
-        
-        stopwatch.Reset();
-
+        // update episode
         episode++;
 
         mapSize = ms;
@@ -114,7 +100,6 @@ public class map : MonoBehaviour
         GameObject[] destinations = GameObject.FindGameObjectsWithTag("destination");
         GameObject[] parcels = GameObject.FindGameObjectsWithTag("parcel");
         GameObject[] buildings = GameObject.FindGameObjectsWithTag("obstacle");
-        // GameObject[] stations = GameObject.FindGameObjectsWithTag("station");
 
         foreach (GameObject hub in hubs) {
             Destroy(hub);
@@ -133,10 +118,6 @@ public class map : MonoBehaviour
                 Destroy(building);
             }
         }
-
-        /*foreach(GameObject station in stations) {
-            Destroy(station);
-        }*/
 
         // init table
         world = new int[mapSize, mapSize];
@@ -172,24 +153,13 @@ public class map : MonoBehaviour
             }
         }
 
-        /*while (true) {
-            int x = Random.Range(0, mapSize);
-            int z = Random.Range(0, mapSize);
-
-            if (world[x, z] == 0) {
-                world[x, z] = 1;
-                chargingStation = Instantiate(ChargingStationPrefab);
-                chargingStation.transform.position = new Vector3((float)(x - mapSize / 2), 0f, (float)(z - mapSize / 2));
-                break;
-            }
-        }*/
-
         SpawnSmallBox();
         SpawnBigBox();
 
         stopwatch.Start();
     }
     
+    // Update Information on screen
     void Update()
     {   
         infoText.text = "small : " + smallBoxSuccCount.ToString() + "/" + maxSmallBoxNum + "\nbig : " + bigBoxSuccCount.ToString() + "/" + maxBigBoxNum + "\n\ntime : " + stopwatch.ElapsedMilliseconds.ToString();
@@ -204,14 +174,12 @@ public class map : MonoBehaviour
 
     public void WriteCSV() {
         string countstr = episode.ToString() + "," + smallBoxSuccCount.ToString() + "," + bigBoxSuccCount.ToString() + "," + (smallBoxSuccCount + bigBoxSuccCount).ToString() + "\n";
-        
         File.AppendAllText(filepath, countstr);
     }
 
     public void WriteTime() {
         stopwatch.Stop();
         string timestr = episode.ToString() + "," + stopwatch.ElapsedMilliseconds.ToString() + "\n";
-
         File.AppendAllText(timepath, timestr);
     }
 

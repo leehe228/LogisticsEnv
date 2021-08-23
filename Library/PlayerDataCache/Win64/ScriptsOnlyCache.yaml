@@ -7,7 +7,6 @@ ScriptsOnlyBuild:
     - PA_DronePack.PA_ObjectID
     - PA_DronePack.UAVAgent
     - bigbox
-    - gridSensor
     - map
     - smallbox
     Unity.ML-Agents.dll:
@@ -96,8 +95,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 3672}
     - Class: 114
       Script: {instanceID: 3940}
-    - Class: 114
-      Script: {instanceID: 4876}
     - Class: 114
       Script: {instanceID: 5084}
     - Class: 115
@@ -791,7 +788,7 @@ ScriptsOnlyBuild:
     className: Match3ActuatorComponent
   - hash:
       serializedVersion: 2
-      Hash: 426f904c48bf5d0a2861c5d13cc2e062
+      Hash: ec4629c0ad11078ae8275f90a790754a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: map
