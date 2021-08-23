@@ -46,18 +46,14 @@ public class map : MonoBehaviour
     public float seconds;
 
     public string starttime = System.DateTime.Now.ToString("yyyyMMddHHmmss");
-    public string filepath, timepath;
+    public string filepath = null, timepath = null;
     public bool writelock;
 
     public int episode = -1;
 
     Stopwatch stopwatch = new Stopwatch();
 
-    public void InitWorld(int ms, int nb, int slimit, int blimit) {
-        
-        // start stopwatch
-        stopwatch.Reset();
-
+    public void Awake() { 
         // directory check
         if (!Directory.Exists("./CSV/")) {
             Directory.CreateDirectory("./CSV/");
@@ -74,6 +70,12 @@ public class map : MonoBehaviour
         if (!File.Exists(timepath)) {
             File.Create(timepath);
         }
+    }
+
+    public void InitWorld(int ms, int nb, int slimit, int blimit) {
+        
+        // start stopwatch
+        stopwatch.Reset();
 
         // update episode
         episode++;
@@ -174,13 +176,13 @@ public class map : MonoBehaviour
 
     public void WriteCSV() {
         string countstr = episode.ToString() + "," + smallBoxSuccCount.ToString() + "," + bigBoxSuccCount.ToString() + "," + (smallBoxSuccCount + bigBoxSuccCount).ToString() + "\n";
-        File.AppendAllText(filepath, countstr);
+        if (!System.String.IsNullOrEmpty(filepath)) File.AppendAllText(filepath, countstr);
     }
 
     public void WriteTime() {
         stopwatch.Stop();
         string timestr = episode.ToString() + "," + stopwatch.ElapsedMilliseconds.ToString() + "\n";
-        File.AppendAllText(timepath, timestr);
+        if (!System.String.IsNullOrEmpty(timepath)) File.AppendAllText(timepath, timestr);
     }
 
     public void SpawnSmallBox() {

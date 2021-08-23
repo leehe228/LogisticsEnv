@@ -837,4 +837,4 @@ ScriptsOnlyBuild:
   platform: 24
   scenePathNames:
   - Assets/Scenes/Logistics.unity
-  playerPath: D:/Github/LogisticsEnv/Build_Linux/Logistics_nowindow.x86_64
+  playerPath: D:/Github/LogisticsEnv/Build_Linux/Logistics_windowless.x86_64
