@@ -22,7 +22,7 @@ def make_parallel_env():
                          capture_frame_rate=30)
             return env
         return init_env
-    return DummyVecEnv([get_env_fn(0)])
+    return DummyVecEnv([get_env_fn()])
 
 def run(config):
     model_path = '../run2/model.pt'
