@@ -16,7 +16,7 @@ def make_parallel_env():
                          max_bigbox=10, 
                          width=1280, 
                          height=720, 
-                         timescale=1, 
+                         timescale=20, 
                          quality_level=5, 
                          target_frame_rate=30, 
                          capture_frame_rate=30)
@@ -25,7 +25,7 @@ def make_parallel_env():
     return DummyVecEnv([get_env_fn()])
 
 def run(config):
-    model_path = '../run2/model.pt'
+    model_path = '../run2/model.pt' # write model path
     model = AttentionSAC.init_from_save(model_path)
     env = make_parallel_env()
     
@@ -67,7 +67,7 @@ def run(config):
 if __name__ == '__main__':
     config = dict()
 
-    config["n_episodes"] = 100
+    config["n_episodes"] = 1000
     config["episode_length"] = 3000
 
     run(config)

@@ -4,7 +4,6 @@ import numpy as np
 from pathlib import Path
 from torch.autograd import Variable
 from tensorboardX import SummaryWriter
-from utils.make_env import make_env
 from utils.buffer import ReplayBuffer
 from utils.env_wrappers import SubprocVecEnv, DummyVecEnv
 from algorithms.attention_sac import AttentionSAC
@@ -60,7 +59,7 @@ def run(config):
     env = make_parallel_env(config["env_id"], config["n_rollout_threads"], run_num)
     # env = UnityEnv("../Build/Logistics")
     model = AttentionSAC.init_from_env(env, tau=config["tau"], pi_lr=config["pi_lr"], q_lr=config["q_lr"], gamma=config["gamma"], pol_hidden_dim=config["pol_hidden_dim"], critic_hidden_dim=config["critic_hidden_dim"], attend_heads=config["attend_heads"], reward_scale=config["reward_scale"])
-
+    
     replay_buffer = ReplayBuffer(config["buffer_length"], model.nagents,
                                  [obsp[0] for obsp in env.observation_space],
                                  [acsp for acsp in env.action_space])
