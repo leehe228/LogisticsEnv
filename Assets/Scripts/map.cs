@@ -8,7 +8,6 @@ using System.Diagnostics;
 using PA_DronePack;
 public class map : MonoBehaviour
 {
-    // Waiting Queue
     public int maxSmallBoxNum;
     public int maxBigBoxNum;
 
@@ -32,7 +31,6 @@ public class map : MonoBehaviour
     // Hub Instance
     public GameObject smallHub;
     public GameObject bigHub;
-    // public GameObject chargingStation;
 
     // map parameter
     int mapSize;
@@ -192,7 +190,7 @@ public class map : MonoBehaviour
             s += uav.GetComponent<UAVAgent>().collideCount;
         }
 
-        agentstr = agentstr + "," + s.ToString();
+        agentstr = agentstr + "," + s.ToString() + "\n";
 
         if (!System.String.IsNullOrEmpty(collidefile)) {
             File.AppendAllText(collidefile, agentstr);
