@@ -156,6 +156,6 @@ if __name__ == '__main__':
     config["tau"] = 0.001
     config["gamma"] = 0.99
     config["reward_scale"] = 100.0
-    config["use_gpu"] = False
+    config["use_gpu"] = True
 
     run(config)

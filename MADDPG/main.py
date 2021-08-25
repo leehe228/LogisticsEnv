@@ -10,8 +10,6 @@ from algorithms.maddpg import MADDPG
 
 from UnityGymWrapper5 import GymEnv
 
-USE_CUDA = False  # torch.cuda.is_available()
-
 
 def make_parallel_env(env_id, n_rollout_threads, seed):
     def get_env_fn(rank):
@@ -59,7 +57,7 @@ def run(config):
 
     torch.manual_seed(config["seed"])
     np.random.seed(config["seed"])
-    if not USE_CUDA:
+    if not config["use_gpu"]:
         torch.set_num_threads(config["n_training_threads"])
     env = make_parallel_env(
         config["env_id"], config["n_rollout_threads"], config["seed"])
@@ -114,14 +112,14 @@ def run(config):
 
             if (len(replay_buffer) >= config["batch_size"] and
                     (t % config["steps_per_update"]) < config["n_rollout_threads"]):
-                if USE_CUDA:
+                if config["use_gpu"]:
                     maddpg.prep_training(device='gpu')
                 else:
                     maddpg.prep_training(device='cpu')
                 for u_i in range(config["n_rollout_threads"]):
                     for a_i in range(maddpg.nagents):
                         sample = replay_buffer.sample(config["batch_size"],
-                                                      to_gpu=USE_CUDA)
+                                                      to_gpu=config["use_gpu"])
                         maddpg.update(sample, a_i, logger=logger)
                     maddpg.update_all_targets()
                 maddpg.prep_rollouts(device='cpu')
@@ -169,5 +167,6 @@ if __name__ == '__main__':
     config["tau"] = 0.01
     config["agent_alg"] = "MADDPG"  # MADDPG or DDPG
     config["adversary_alg"] = "MADDPG"  # MADDPG or DDPG
+    config["use_gpu"] = True
 
     run(config)
