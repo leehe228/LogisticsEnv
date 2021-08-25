@@ -47,6 +47,7 @@ public class map : MonoBehaviour
 
     public string starttime = System.DateTime.Now.ToString("yyyyMMddHHmmss");
     public string filepath = null, timepath = null;
+    public string collidefile;
     public bool writelock;
 
     public int episode = -1;
@@ -62,6 +63,7 @@ public class map : MonoBehaviour
         // csv file path
         filepath = "./CSV/count" + starttime + ".csv";
         timepath = "./CSV/time" + starttime + ".csv";
+        collidefile = "./CSV/collide" + starttime + ".csv";
 
         // file check
         if (!File.Exists(filepath)) {
@@ -69,6 +71,10 @@ public class map : MonoBehaviour
         }
         if (!File.Exists(timepath)) {
             File.Create(timepath);
+        }
+
+        if (!File.Exists(collidefile)) {
+            File.Create(collidefile);
         }
     }
 
@@ -177,6 +183,20 @@ public class map : MonoBehaviour
     public void WriteCSV() {
         string countstr = episode.ToString() + "," + smallBoxSuccCount.ToString() + "," + bigBoxSuccCount.ToString() + "," + (smallBoxSuccCount + bigBoxSuccCount).ToString() + "\n";
         if (!System.String.IsNullOrEmpty(filepath)) File.AppendAllText(filepath, countstr);
+
+        GameObject[] uavs = GameObject.FindGameObjectsWithTag("uav");
+        string agentstr = episode.ToString();
+        int s = 0;
+        foreach (GameObject uav in uavs) {
+            agentstr = agentstr + "," + uav.GetComponent<UAVAgent>().collideCount.ToString();
+            s += uav.GetComponent<UAVAgent>().collideCount;
+        }
+
+        agentstr = agentstr + "," + s.ToString();
+
+        if (!System.String.IsNullOrEmpty(collidefile)) {
+            File.AppendAllText(collidefile, agentstr);
+        }
     }
 
     public void WriteTime() {

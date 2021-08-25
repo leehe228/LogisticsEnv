@@ -278,7 +278,7 @@ ScriptsOnlyBuild:
     className: Text
   - hash:
       serializedVersion: 2
-      Hash: 073dd1f7abe35cd59a76340e02197726
+      Hash: 1c4cdb8b05329fb23b44211cce0c54f7
     assemblyName: Assembly-CSharp.dll
     namespaceName: PA_DronePack
     className: UAVAgent
@@ -788,7 +788,7 @@ ScriptsOnlyBuild:
     className: Match3ActuatorComponent
   - hash:
       serializedVersion: 2
-      Hash: ec4629c0ad11078ae8275f90a790754a
+      Hash: 96f4e2c36f0571ea43eb0280ccdc2048
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: map

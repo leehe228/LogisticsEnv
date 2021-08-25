@@ -33,6 +33,8 @@ namespace PA_DronePack
         // MAP gameobject
         GameObject MAP;
 
+        public int collideCount;
+
         public override void Initialize()
         {
             dcoScript = gameObject.GetComponent<PA_DroneController>();
@@ -52,6 +54,8 @@ namespace PA_DronePack
             line.startWidth = 0.05f; line.endWidth = 0.05f;
             line.SetPosition(0, new Vector3(0f, -10f, 0f));
             line.SetPosition(1, new Vector3(0f, -10f, 0f));
+
+            collideCount = 0;
         }
 
         public override void OnEpisodeBegin()
@@ -304,12 +308,13 @@ namespace PA_DronePack
             if (other.gameObject.CompareTag("uav"))
             {
                 AddReward(-10.0f);
+                // collideCount++;
             }
 
-            // collide with obstacles or walls
-            if (other.gameObject.CompareTag("obstacle") || other.gameObject.CompareTag("wall"))
-            {
+            // collide with building
+            if (other.gameObject.CompareTag("obstacle")) {
                 AddReward(-10.0f);
+                collideCount++;
             }
         }
 

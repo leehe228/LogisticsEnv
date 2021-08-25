@@ -10,21 +10,22 @@ from algorithms.attention_sac import AttentionSAC
 
 from UnityGymWrapper5 import GymEnv
 
+
 def make_parallel_env(env_id, n_rollout_threads, seed):
     def get_env_fn(rank):
         def init_env():
             # edit parameters
-            env = GymEnv(name="../Build_Linux/Logistics", 
-                         mapsize=13, 
-                         numbuilding=3, 
-                         max_smallbox=10, 
-                         max_bigbox=10, 
-                         width=480, 
-                         height=270, 
-                         timescale=20, 
-                         quality_level=5, 
-                         target_frame_rate=30, 
-                         capture_frame_rate=30)
+            env = GymEnv(name="../Build_Linux/Logistics",
+                         mapsize=13,
+                         numbuilding=3,
+                         max_smallbox=100,
+                         max_bigbox=100,
+                         width=480,
+                         height=270,
+                         timescale=20,
+                         quality_level=5,
+                         target_frame_rate=None,
+                         capture_frame_rate=None)
 
             np.random.seed(seed + rank * 1000)
             return env
@@ -33,7 +34,7 @@ def make_parallel_env(env_id, n_rollout_threads, seed):
         return DummyVecEnv([get_env_fn(0)])
     else:
         return SubprocVecEnv([get_env_fn(i) for i in range(n_rollout_threads)])
-        
+
 
 def run(config):
     model_dir = Path('./models') / config["env_id"] / config["model_name"]
@@ -56,16 +57,17 @@ def run(config):
 
     torch.manual_seed(run_num)
     np.random.seed(run_num)
-    env = make_parallel_env(config["env_id"], config["n_rollout_threads"], run_num)
-    # env = UnityEnv("../Build/Logistics")
-    model = AttentionSAC.init_from_env(env, tau=config["tau"], pi_lr=config["pi_lr"], q_lr=config["q_lr"], gamma=config["gamma"], pol_hidden_dim=config["pol_hidden_dim"], critic_hidden_dim=config["critic_hidden_dim"], attend_heads=config["attend_heads"], reward_scale=config["reward_scale"])
-    
+    env = make_parallel_env(
+        config["env_id"], config["n_rollout_threads"], run_num)
+    model = AttentionSAC.init_from_env(env, tau=config["tau"], pi_lr=config["pi_lr"], q_lr=config["q_lr"], gamma=config["gamma"], pol_hidden_dim=config["pol_hidden_dim"],
+                                       critic_hidden_dim=config["critic_hidden_dim"], attend_heads=config["attend_heads"], reward_scale=config["reward_scale"])
+
     replay_buffer = ReplayBuffer(config["buffer_length"], model.nagents,
                                  [obsp[0] for obsp in env.observation_space],
                                  [acsp for acsp in env.action_space])
     t = 0
     for ep_i in range(0, config["n_episodes"], config["n_rollout_threads"]):
-        
+
         obs = env.reset()
         model.prep_rollouts(device='cpu')
 
@@ -73,29 +75,32 @@ def run(config):
 
         for step in range(config["episode_length"]):
             # rearrange observations to be per agent, and convert to torch Variable
-            torch_obs = [Variable(torch.Tensor(np.vstack(obs[:, i])), requires_grad=False) for i in range(model.nagents)]
+            torch_obs = [Variable(torch.Tensor(
+                np.vstack(obs[:, i])), requires_grad=False) for i in range(model.nagents)]
 
             # get actions as torch Variables
             torch_agent_actions = model.step(torch_obs, explore=True)
             # convert actions to numpy arrays
             agent_actions = [ac.data.numpy() for ac in torch_agent_actions]
             # rearrange actions to be per environment
-            actions = np.array([[ac[i] for ac in agent_actions] for i in range(config["n_rollout_threads"])])
+            actions = np.array([[ac[i] for ac in agent_actions]
+                               for i in range(config["n_rollout_threads"])])
 
             next_obs, rewards, done, info = env.step(actions)
             replay_buffer.push(obs, agent_actions, rewards, next_obs, done)
 
             for i in range(env.nagent):
                 episode_rewards[i] += rewards[0][i]
-            
+
             if step % 100 == 0:
-                print("step : %4d/%4d | rewards : %.4f %.4f %.4f %.4f %.4f " % (step, config["episode_length"], *episode_rewards), end='\r')
+                print("step : %4d/%4d | rewards : %.4f %.4f %.4f %.4f %.4f " %
+                      (step, config["episode_length"], *episode_rewards), end='\r')
 
             obs = next_obs
             t += config["n_rollout_threads"]
 
             if (len(replay_buffer) >= config["batch_size"] and
-                (t % config["steps_per_update"]) < config["n_rollout_threads"]):
+                    (t % config["steps_per_update"]) < config["n_rollout_threads"]):
                 if config["use_gpu"]:
                     model.prep_training(device='gpu')
                 else:
@@ -108,7 +113,8 @@ def run(config):
                     model.update_all_targets()
                 model.prep_rollouts(device='cpu')
 
-        print("episode : %8d/%8d | rewards : %.4f %.4f %.4f %.4f %.4f " % (ep_i + 1, config["n_episodes"], *episode_rewards), end='\n')
+        print("episode : %8d/%8d | rewards : %.4f %.4f %.4f %.4f %.4f " %
+              (ep_i + 1, config["n_episodes"], *episode_rewards), end='\n')
 
         ep_rews = replay_buffer.get_average_rewards(
             config["episode_length"] * config["n_rollout_threads"])
@@ -119,7 +125,8 @@ def run(config):
         if ep_i % config["save_interval"] < config["n_rollout_threads"]:
             model.prep_rollouts(device='cpu')
             os.makedirs(run_dir / 'incremental', exist_ok=True)
-            model.save(run_dir / 'incremental' / ('model_ep%i.pt' % (ep_i + 1)))
+            model.save(run_dir / 'incremental' /
+                       ('model_ep%i.pt' % (ep_i + 1)))
             model.save(run_dir / 'model.pt')
 
     model.save(run_dir / 'model.pt')
