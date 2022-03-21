@@ -26,6 +26,7 @@ This UAV Logistics Environment with a continuous observation and discrete action
 - Followed by your OS, select built environment file between `Build_Windows` or `Build_Linux` (give right path)
 - if your OS is Linux(Ubuntu), before training grant permission is essential, with `sudo chmod a+xwr /Build_Linux/Logistics.x86_64`
 - `python main.py` to run training
+- To replay with your trained model, set path to the `model.pt` on `replay.py` and `python replay.py` to replay
 
 **Tensorboard**
 
