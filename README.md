@@ -3,12 +3,19 @@ This UAV Logistics Environment with a continuous observation and discrete action
 
 ### Requirements
 
-- Python 3.6 (minimum)
-- [OpenAI baselines](https://github.com/openai/baselines), version 0.1.6
-- [PyTorch](https://pytorch.org/) (compatible to your CUDA version)
-- [Tensorboard](https://github.com/tensorflow/tensorboard) (compatible to PyTorch version)
-- [OpenAI Gym](https://github.com/openai/gym), version 0.15.7
-- [Unity mlagents](https://github.com/Unity-Technologies/ml-agents), version 0.27.0 (Release 18)
+- Python 3.8 (minimum)
+- [OpenAI `baselines`](https://github.com/openai/baselines), version 0.1.6
+- [`pytorch`](https://pytorch.org/get-started/locally/), < 1.9.0, >= 1.6.0 (compatible to your CUDA version)
+- [`tensorboard`](https://github.com/tensorflow/tensorboard) (compatible to PyTorch version)
+- [OpenAI `gym`](https://github.com/openai/gym), version 0.15.7
+- [Unity `mlagents`](https://github.com/Unity-Technologies/ml-agents), version 0.27.0 (Release 18)
+<br>
+
+### My Environments
+- Ubuntu 20.04 LTS / Python 3.8.10
+- RTX3070 / CUDA 11.1 / [CuDNN 8.1.1](https://developer.nvidia.com/rdp/cudnn-archive#a-collapse811-111)
+- `torch 1.8.2+cu111` / `torchaudio 0.8.2` / `torchvision 0.9.2+cu111`
+
 <br>
 
 **Unity Editor**
@@ -77,7 +84,7 @@ GymWrapper provided by Unity supports only single agent environment.
 [UnityGymWrapper5.py](https://github.com/dmslab-konkuk/LogisticsEnv/blob/main/MAAC/UnityGymWrapper5.py) is in Github Repository.
 <br>
 
-**Configurations**
+**Parameter Configurations**
 `env = GymEnv(name='', width=0, height=0, ...)`
 
 - `width` : Defines the width of the display. (Must be set alongside height)
