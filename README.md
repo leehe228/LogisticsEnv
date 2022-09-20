@@ -56,6 +56,10 @@ This UAV Logistics Environment with a continuous observation and discrete action
 
 ### Scenario
 ![](https://images.velog.io/images/leehe228/post/8d01796d-133d-41ba-8ec6-bf43f9937032/image.png)
+- UAVs need to move parcels(boxes) from **hubs** to **destinations**.
+- There are two types of boxes - big boxes and small boxes. A big box can only be moved if two or more UAVs cooperate.
+- The size of map and the number of UAVs and obstacles can be customized for various environments.
+- When UAV touches the box, the box is connected. If UAV is farther than a certain distance from the box, the box will fall off.
 
 <br>
 
