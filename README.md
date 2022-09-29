@@ -79,6 +79,18 @@ This Logistics Environment follows [OpenAI Gym](https://github.com/openai/gym) A
 - `env = GymEnv(name="path to Unity Environment", ...)` - Returns wrapped environment object.
 - `obs = reset()` - Resets environment to the initial state. Returns initial observation.
 - `obs, reward, done, info = step(actions)` - A single step. Require actions, returns observation, reward, done, information list.
+
+**example**
+```python
+from UnityGymWrapper5 import GymEnv # Unity Gym Style Wrapper
+env = GymEnv(name="../Build_Linux/Logistics") # Call Logistics Environment
+done, obs = False, env.reset() # reset Environment
+
+while not done:
+    actions = get_actions(obs) # get actions
+    next_obs, reward, done, info = env.step(actions) # next step
+    obs = next_obs
+```
 <br>
 
 **Unity Gym Wrapper**
