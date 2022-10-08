@@ -12,9 +12,11 @@ This UAV Logistics Environment with a continuous observation and discrete action
 <br>
 
 ### My Environments
-- Ubuntu 20.04 LTS / Python 3.8.10
-- RTX3070 / CUDA 11.1 / [CuDNN 8.1.1](https://developer.nvidia.com/rdp/cudnn-archive#a-collapse811-111)
+- Ubuntu 20.04 LTS / Python 3.8.10 / Anaconda 3.1 (Virtual Environment)
+- NVIDIA GeForce RTX 3070 / Intel(R) Core(TM) i5-10400F (@2.90GHz) / 32GB Memory (RAM)
+- CUDA 11.1 / [CuDNN 8.1.1](https://developer.nvidia.com/rdp/cudnn-archive#a-collapse811-111)
 - `torch 1.8.2+cu111` / `torchaudio 0.8.2` / `torchvision 0.9.2+cu111`
+- It took 13.9 days to train MAAC model with 150K episodes.
 
 <br>
 
