@@ -1,5 +1,5 @@
-## Logistics Environment
-This UAV Logistics Environment with a continuous observation and discrete action space, along with physical based UAVs and parcels which powered by Unity Engine. Used in Paper [Multi agent reinforcement learning based UAV control for Urban Aerial Mobility logistics](https://apisat2021.org/) in [APISAT2021](https://apisat2021.org/) Conference.
+## UAV Logistics Environment for MLRL
+This **UAV Logistics Environment** with a continuous observation and discrete action space, along with **physical based UAVs** and parcels which powered by Unity Engine. Used in Paper ["Multiagent Reinforcement Learning Based on Fusion-Multiactor-Attention-Critic for Multiple-Unmanned-Aerial-Vehicle Navigation Control"](https://www.mdpi.com/1996-1073/15/19/7426)(MDPI Energies 2022, 15(19), 7426 (SCIE), 2022.10.10.) and ["Multi-agent Reinforcement Learning-Based UAS Control for Logistics EnvironmentsMulti-agent Reinforcement Learning-Based UAS Control for Logistics Environments"](https://link.springer.com/chapter/10.1007/978-981-19-2635-8_71)(Springer LNEE, volume 913 (SCOPUS). 2022.09.30.)
 
 ### Requirements
 
