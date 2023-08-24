@@ -193,6 +193,8 @@ UAV has to avoid buildings and another UAV with raycast observation.
 ### Training Result
 We trained model with random-decision model, reinforcement model (SAC, DQN, MADDPG) and MAAC (Multi-Attention-Actor-Critic for Multi-Agent) model. We trained **30k episode** each model.
 
+**I am currently working for provide the trained model files.**
+
 <br>
 
 ### Credit
