@@ -1,6 +1,14 @@
 ## UAV Logistics Environment for MLRL
 This **UAV Logistics Environment** with a continuous observation and discrete action space, along with **physical based UAVs** and parcels which powered by Unity Engine. Used in Paper ["Multiagent Reinforcement Learning Based on Fusion-Multiactor-Attention-Critic for Multiple-Unmanned-Aerial-Vehicle Navigation Control"](https://www.mdpi.com/1996-1073/15/19/7426)(MDPI Energies 2022, 15(19), 7426 (SCIE), 2022.10.10.) and ["Multi-agent Reinforcement Learning-Based UAS Control for Logistics EnvironmentsMulti-agent Reinforcement Learning-Based UAS Control for Logistics Environments"](https://link.springer.com/chapter/10.1007/978-981-19-2635-8_71)(Springer LNEE, volume 913 (SCOPUS). 2022.09.30.)
 
+### LogisticsEnv Builds Release (1.0.0)
+(2024. 3. 11.)
+- [Windows(x86-64)](https://konkukackr-my.sharepoint.com/:u:/g/personal/leehe228_konkuk_ac_kr/ETkqZMK1N4hJoETrxWPzzKkBNhSc-zeMMA1y3jkYguvltg?e=C7tmZr)
+- [Linux](https://konkukackr-my.sharepoint.com/:u:/g/personal/leehe228_konkuk_ac_kr/EeXk4mSlfs9LmU2sITwh9UEBiSa_SzBqEv1lZk3Lr3C1KA?e=awadJA)
+- [MacOS(Intel 64bit)](https://konkukackr-my.sharepoint.com/:f:/g/personal/leehe228_konkuk_ac_kr/Euhm6CZyGwRDvX8AHMmvi74BpHjcytjgcyaUvXat5eYARQ?e=vhFYns)
+- [MacOS(Apple Silicon](https://konkukackr-my.sharepoint.com/:f:/g/personal/leehe228_konkuk_ac_kr/EmHkAWmasaFIiuJjQvJQyJYBpxX4zdgNbvxQssbRtVNtSg?e=xEHhER)
+<br>
+
 ### Requirements
 
 - Python 3.8 (minimum)
