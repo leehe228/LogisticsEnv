@@ -11,8 +11,13 @@ This **UAV Logistics Environment** with a continuous observation and discrete ac
 <br>
 
 ### 📌 Trained Model
-These trained model data will be provided soon. (training is running)
-<br><br>
+<img width="239" alt="image" src="https://github.com/leehe228/LogisticsEnv/assets/37548919/759d14dc-1f29-4513-bd53-e1f4ab2d7eda"><br/>
+- [Download - MAAC Trained Model files(.pt)](https://drive.google.com/drive/folders/1cd17nqOY6nNDjxIUsFIw1KQF8No4MgIV?usp=share_link)
+```python
+model_path = '~~/<trained_model_name>.pt'  # write model path
+model = AttentionSAC.init_from_save(model_path) # load model data from saved file
+```
+<br>
 
 ### Requirements
 
